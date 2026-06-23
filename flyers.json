@@ -178,6 +178,25 @@
         "Short-term rentals (Airbnb-style): a brand-new short-term lease without a 12-month Schedule E history generally cannot be used on the Conventional side."
       ],
       "footer_note": "General guideline overview, not a commitment to lend — agency rules change and every file is different. Send me the scenario and I'll confirm exactly how the numbers work for your client."
+    },
+    {
+      "type": "info",
+      "slug": "asset-based-income-retirees",
+      "title": "Asset-Rich, Income-Light? How Buyers Qualify Without a Paycheck",
+      "category": "Buyer Programs",
+      "blurb": "Retirees and high-net-worth buyers often have big balances but little 'income' on paper. Two tools fix that — drawing income from retirement distributions, or converting a lump of assets into qualifying income. Here's when each one works.",
+      "use_when": "A buyer has strong savings or retirement accounts but limited W-2 or 1099 income.",
+      "date": "June 2026",
+      "posted": "2026-06-23",
+      "highlights": [
+        "The problem this solves: a buyer who's retired or living off investments may show little monthly income, even with a seven-figure nest egg. Two separate approaches can turn those assets into qualifying income so the loan works.",
+        "Approach 1 — Retirement / pension / annuity income they are already drawing: if a buyer takes regular distributions from a 401(k), IRA, pension, or annuity, that can count as income. Fixed payments need no minimum history; variable distributions use a 12-month average. The income generally must be expected to continue at least 3 years, and they need penalty-free access to the funds.",
+        "Helpful detail: there's no minimum age to use retirement income on Conventional, and multiple retirement accounts can be combined to meet that 3-year continuance test. A 30% 'haircut' on stock/bond/mutual fund balances that older guidance required is no longer in play.",
+        "Approach 2 — Asset depletion (turning a lump of assets into income): when a buyer isn't drawing income yet, Fannie and Freddie let us divide eligible liquid/retirement assets across a set term to create an imputed monthly income — no actual withdrawals required. This is the classic 'tons of savings, no paycheck' solution.",
+        "The fine print on asset depletion: it is Conventional-only (FHA, VA, and USDA do NOT allow it), typically purchase or rate/term refinance, with LTV caps that are more generous once an asset owner is 62+. Funds must be liquid, accessible without penalty, and sourced — closing costs, down payment, and reserves come out before the calculation.",
+        "Important for setting expectations: some loan investors add their own overlays on asset-based income, so a scenario that fits agency rules can still vary by where the loan is placed. That is exactly the kind of thing to run by me before your buyer writes."
+      ],
+      "footer_note": "General guideline overview, not a commitment to lend — agency rules and investor overlays change and every file is different. Send me the buyer's asset picture and I'll confirm the cleanest path to qualify."
     }
   ]
 }
