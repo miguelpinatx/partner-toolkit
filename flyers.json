@@ -1,0 +1,163 @@
+{
+  "categories": [
+    "Quick Reference",
+    "Buyer Programs",
+    "Investor & Specialty",
+    "Market & Education"
+  ],
+  "flyers": [
+    {
+      "slug": "realtor-cheat-sheet",
+      "title": "2026 Realtor Cheat Sheet",
+      "category": "Quick Reference",
+      "blurb": "One-page snapshot of loan limits, down payments, seller contributions, and seasoning requirements across Conventional, FHA, VA, and USDA. The fastest answer to “can my buyer qualify?”",
+      "use_when": "Pull this up the moment a buyer question comes up."
+    },
+    {
+      "slug": "loan-cheat-sheet",
+      "title": "2026 Loan Cheat Sheet",
+      "category": "Quick Reference",
+      "blurb": "Deeper side-by-side of all five loan types — credit scores, down payments, MI, manufactured-home rules, and the property-condition gotchas (handrails, well/septic, road maintenance) that derail closings.",
+      "use_when": "When a property’s condition or a buyer’s profile is unusual."
+    },
+    {
+      "slug": "quick-loan-reference",
+      "title": "2026 Quick Loan Reference Guide",
+      "category": "Quick Reference",
+      "blurb": "Occupancy, down payment, MI, DTI, and minimum credit by program, plus 2026 conforming and FHA loan limits by unit count. Includes bankruptcy and foreclosure waiting periods.",
+      "use_when": "Quick limit and DTI lookups for any scenario."
+    },
+    {
+      "slug": "product-reference-guide",
+      "title": "Product Reference Guide",
+      "category": "Quick Reference",
+      "blurb": "The full menu of CMG programs in one place — from All In One Loan and HomeFundIt to bank-statement, 1099-only, asset-qualifier, reverse, and builder tools. A map of everything I can do.",
+      "use_when": "When you’re not sure a program exists — it probably does."
+    },
+    {
+      "slug": "closing-costs-explained",
+      "title": "Closing Costs Explained",
+      "category": "Quick Reference",
+      "blurb": "A plain-English rundown of the common closing costs — origination, appraisal, title/escrow, recording, daily interest, and the tax and insurance escrows. Great for setting buyer expectations early.",
+      "use_when": "Buyers asking “what are all these fees?”"
+    },
+    {
+      "slug": "three-day-disclosure-rule",
+      "title": "The Three-Day Disclosure Rule",
+      "category": "Quick Reference",
+      "blurb": "A visual chart of the TRID 3-day rule — by closing day, when the buyer must receive the Closing Disclosure and when it must be mailed. Pairs with the CD timing tool below.",
+      "use_when": "Planning a closing timeline."
+    },
+    {
+      "slug": "loan-document-checklist",
+      "title": "Loan Document Checklist",
+      "category": "Quick Reference",
+      "blurb": "Everything a buyer needs to gather, split for salaried/hourly and self-employed borrowers — IDs, pay stubs, W2s/1099s, tax returns, and asset statements. Speeds up the whole process.",
+      "use_when": "Send the moment a buyer is ready to apply."
+    },
+    {
+      "slug": "community-one-dpa",
+      "title": "CMG Community ONE — Down Payment Assistance",
+      "category": "Buyer Programs",
+      "blurb": "A 2% grant up to $6,000 with down payments as low as 1%, paired with HomeReady or Home Possible. Built to get more first-time buyers to the closing table.",
+      "use_when": "First-time and budget-conscious buyers."
+    },
+    {
+      "slug": "graduate-advantage",
+      "title": "CMG Graduate Advantage",
+      "category": "Buyer Programs",
+      "blurb": "Recent grads in medical, legal, engineering, architecture, or accounting can qualify on future income with a signed offer letter — up to 90% financing and $1.5M, no current income needed.",
+      "use_when": "New professionals with a job offer but little history."
+    },
+    {
+      "slug": "medpro-doctors",
+      "title": "CMG MedPro — No Down Payment for Doctors",
+      "category": "Buyer Programs",
+      "blurb": "No down payment and no mortgage insurance for eligible physicians, dentists, vets, CRNAs, residents, and fellows. One occupying borrower must be practicing in their field.",
+      "use_when": "Medical professionals — a strong relocation niche."
+    },
+    {
+      "slug": "second-look",
+      "title": "Not Approved? Let’s Take a Second Look",
+      "category": "Buyer Programs",
+      "blurb": "A turned-down buyer isn’t a dead lead. Covers our full loan menu plus Texas DPA — HomeFundIt, TSAHC, TDHCA, FHA Buyer’s Choice, and MedPro — for buyers another lender passed on.",
+      "use_when": "Any buyer who heard “no” somewhere else."
+    },
+    {
+      "slug": "dscr-investor-loans",
+      "title": "DSCR Loans for Investors",
+      "category": "Investor & Specialty",
+      "blurb": "Qualify on the property’s rental income — no W2s or tax returns. Seven DSCR options up to $3M and 85% LTV for single-family, multi-unit, and short-term rentals.",
+      "use_when": "Investor clients building a portfolio."
+    },
+    {
+      "slug": "renovation-lending",
+      "title": "Renovation Lending Guide",
+      "category": "Investor & Specialty",
+      "blurb": "Turn a dated listing into a buyer’s dream. Full breakdown of FHA 203(k), Limited 203(k), HomeStyle, and VA Renovation — how each works, what’s allowed, and how draws are funded.",
+      "use_when": "Hard-to-move listings or buyers who want to customize."
+    },
+    {
+      "slug": "list-and-lock",
+      "title": "List & Lock",
+      "category": "Investor & Specialty",
+      "blurb": "A modern alternative to price cuts and buydowns. Sellers earn a credit up to $5,000, buyers lock a lower rate, and CMG kicks in an extra 1%. A listing-appointment differentiator.",
+      "use_when": "Listing presentations and rate-sensitive buyers."
+    },
+    {
+      "slug": "cash-offer-programs",
+      "title": "Cash Offer Programs",
+      "category": "Investor & Specialty",
+      "blurb": "Help buyers compete like cash with Knock, Zavvie, and Zoom Casa — bridge loans, all-cash offers on the next home, and buy-before-you-sell options. Includes program comparisons and coverage.",
+      "use_when": "Buyers who need to win a bidding war or move before selling."
+    },
+    {
+      "slug": "condo-financing-updates",
+      "title": "Conventional Condo Financing Updates",
+      "category": "Market & Education",
+      "blurb": "Fannie/Freddie loosened condo insurance and project-review rules in 2026 — more condo projects now qualify for conventional financing with as little as 3% down.",
+      "use_when": "Condo deals that stalled on project eligibility."
+    },
+    {
+      "slug": "homeownership-wealth",
+      "title": "Why Homeownership Builds Wealth",
+      "category": "Market & Education",
+      "blurb": "80+ years of U.S. home-price history — a 71-6-5 record since 1944 — to reassure buyers waiting for a crash that never comes. Great share-piece for fence-sitters.",
+      "use_when": "Buyers paralyzed by “prices have to drop.”"
+    },
+    {
+      "type": "info",
+      "slug": "family-opportunity-financing",
+      "title": "Buying a Home for a Parent or Disabled Child",
+      "category": "Buyer Programs",
+      "blurb": "A parent or adult child can buy a home as a primary residence for a low/no-income family member — with owner-occupied rates and terms, not investment pricing.",
+      "use_when": "A client wants to house an aging parent or a disabled adult child.",
+      "date": "June 2026",
+      "highlights": [
+        "Conventional (Fannie Mae & Freddie Mac) and FHA all allow it: a borrower can purchase a home for a parent or disabled child who can't qualify on their own, and it's treated as a primary residence — so owner-occupied LTV, rates, and terms apply instead of investment-property pricing.",
+        "The family member who will live there generally does NOT have to be on the loan for Conventional. The occupying relative just needs to use it as their primary residence.",
+        "FHA is different: the parent or disabled child must be on the loan, with the buyer as a non-occupant co-borrower. If the occupant has no credit score, FHA requires manual underwriting.",
+        "VA and USDA do not offer this — it's a Conventional and FHA play only.",
+        "Documentation is light on the Conventional side: lenders may ask for a short letter stating the purchase is intended as the relative's primary residence, but extensive proof of income shortfall generally isn't required."
+      ],
+      "footer_note": "General guideline overview, not a commitment to lend — agency rules change and each file is unique. Reach out and I'll confirm the best structure for your client's situation.",
+      "posted": "2026-06-23"
+    },
+    {
+      "type": "info",
+      "slug": "condo-rules-2026",
+      "title": "Condo Financing Just Got Easier in 2026",
+      "category": "Market & Education",
+      "blurb": "Fannie and Freddie loosened condo insurance and project-review rules this year. More condo deals now qualify for conventional financing.",
+      "use_when": "A condo deal stalled on project eligibility.",
+      "posted": "2026-06-25",
+      "date": "June 2026",
+      "highlights": [
+        "Updated insurance and project-review standards mean more condo projects clear conventional review than before.",
+        "Some buyers can now get in with as little as 3% down on eligible condo projects.",
+        "A warrantability check upfront is still smart — send me the project and I will confirm before your buyer writes."
+      ],
+      "footer_note": "General overview, not a commitment to lend. Each project is reviewed individually."
+    }
+  ]
+}

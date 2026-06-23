@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lending Toolkit &mdash; The Pi&ntilde;a Team &times; The Austin Home Team</title>
+<meta name="description" content="Every CMG home-loan program your buyers and sellers might need, in one place. Curated by Miguel Piña, CMG Home Loans.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #2C343C;
+    --lime: #92C13A;
+    --teal: #56A2AA;
+    --ink: #1d2329;
+    --mute: #66707a;
+    --line: #e6e9ec;
+    --bg: #f6f7f8;
+    --card: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- top bar ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(44,52,60,0.97); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brandmark { display: flex; align-items: center; gap: 14px; }
+  .brandmark img { height: 34px; display: block; }
+  .brandmark .partner {
+    font-family: 'Archivo'; font-weight: 600; color: rgba(255,255,255,0.82);
+    font-size: 13px; letter-spacing: 0.01em;
+    padding-left: 14px; border-left: 1px solid rgba(255,255,255,0.22);
+  }
+  @media (max-width: 560px) { .brandmark .partner { display: none; } }
+  .topnav { display: flex; gap: 22px; }
+  .topnav a { color: rgba(255,255,255,0.72); font-size: 13.5px; font-weight: 500; transition: color .15s; }
+  .topnav a:hover { color: #fff; }
+  @media (max-width: 720px) { .topnav { display: none; } }
+
+  /* ---------- hero ---------- */
+  .hero {
+    background: var(--navy); color: #fff;
+    position: relative; overflow: hidden;
+    padding: 70px 0 78px;
+  }
+  .hero::before {
+    content: ""; position: absolute; right: -120px; top: -120px;
+    width: 420px; height: 420px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(146,193,58,0.22), transparent 65%);
+  }
+  .hero::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px;
+    background: linear-gradient(90deg, var(--lime), var(--teal));
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'Archivo'; font-weight: 700; font-size: 12px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--lime); margin-bottom: 22px;
+  }
+  .eyebrow .sep { color: rgba(255,255,255,0.35); font-weight: 400; }
+  .eyebrow .ptr { color: rgba(255,255,255,0.85); }
+  .hero h1 {
+    font-family: 'Archivo'; font-weight: 900;
+    font-size: clamp(34px, 6vw, 58px); line-height: 1.02;
+    letter-spacing: -0.02em; max-width: 14ch;
+  }
+  .hero h1 .g { color: var(--lime); }
+  .hero .lede {
+    margin-top: 20px; max-width: 56ch;
+    font-size: 17px; color: rgba(255,255,255,0.8);
+  }
+  .hero .meta {
+    margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px 26px;
+    font-size: 13.5px; color: rgba(255,255,255,0.6);
+  }
+  .hero .meta b { color: rgba(255,255,255,0.92); font-weight: 600; }
+
+  /* ---------- stat strip ---------- */
+  .stats {
+    background: var(--teal); color: #fff;
+  }
+  .stats .wrap { display: flex; flex-wrap: wrap; }
+  .stat { flex: 1 1 0; min-width: 150px; padding: 20px 0; }
+  .stat + .stat { border-left: 1px solid rgba(255,255,255,0.18); padding-left: 24px; }
+  .stat .n { font-family: 'Archivo'; font-weight: 800; font-size: 26px; line-height: 1; }
+  .stat .l { font-size: 12.5px; color: rgba(255,255,255,0.85); margin-top: 5px; }
+
+  /* ---------- sections ---------- */
+  main { padding: 56px 0 40px; }
+  .cat-section { margin-bottom: 52px; scroll-margin-top: 76px; }
+  .cat-head { margin-bottom: 22px; }
+  .cat-head h2 {
+    font-family: 'Archivo'; font-weight: 800; font-size: 23px;
+    color: var(--navy); letter-spacing: -0.01em;
+    display: inline-block; padding-bottom: 7px;
+    border-bottom: 3px solid var(--lime);
+  }
+  .cat-head p { color: var(--mute); font-size: 14.5px; margin-top: 10px; }
+
+  .flyer-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+  }
+  @media (max-width: 720px) { .flyer-grid { grid-template-columns: 1fr; } }
+
+  .flyer {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px 22px 18px;
+    display: flex; flex-direction: column;
+    transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+  }
+  .flyer:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(44,52,60,0.12);
+    border-color: var(--teal);
+  }
+  .flyer-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .tag {
+    font-family: 'Archivo'; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--teal); background: rgba(86,162,170,0.1);
+    padding: 4px 9px; border-radius: 999px;
+  }
+  .open { font-size: 12.5px; font-weight: 600; color: var(--lime); opacity: 0; transition: opacity .16s; }
+  .flyer:hover .open { opacity: 1; }
+  .flyer h3 {
+    font-family: 'Archivo'; font-weight: 700; font-size: 17.5px;
+    color: var(--ink); line-height: 1.2; margin-bottom: 8px;
+  }
+  .flyer p { font-size: 14px; color: var(--mute); flex: 1; }
+  .usewhen {
+    margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line);
+    font-size: 12.5px; color: var(--ink);
+  }
+  .usewhen span {
+    font-family: 'Archivo'; font-weight: 700; font-size: 10px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--navy); margin-right: 6px;
+  }
+
+  /* ---------- CTA / footer ---------- */
+  .cta {
+    background: var(--navy); color: #fff; margin-top: 20px;
+  }
+  .cta .wrap { padding: 52px 24px; text-align: center; }
+  .cta h2 { font-family: 'Archivo'; font-weight: 800; font-size: 28px; letter-spacing: -0.01em; }
+  .cta h2 .g { color: var(--lime); }
+  .cta p { color: rgba(255,255,255,0.75); margin: 12px auto 26px; max-width: 48ch; font-size: 15.5px; }
+  .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    font-family: 'Archivo'; font-weight: 700; font-size: 14.5px;
+    padding: 13px 24px; border-radius: 999px; transition: transform .15s, opacity .15s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-lime { background: var(--lime); color: var(--navy); }
+  .btn-out { border: 1.5px solid rgba(255,255,255,0.3); color: #fff; }
+
+  footer { background: #232a30; color: rgba(255,255,255,0.55); font-size: 12px; }
+  footer .wrap { padding: 26px 24px; display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; align-items: center; }
+  footer b { color: rgba(255,255,255,0.85); font-weight: 600; }
+  footer .disc { max-width: 60ch; line-height: 1.5; }
+  .foot-id { display: flex; align-items: center; gap: 16px; }
+  .foot-logo { height: 34px; display: block; }
+  @media (max-width: 560px) { .foot-id { flex-direction: column; align-items: flex-start; gap: 10px; } }
+
+  /* ---------- tools section ---------- */
+  .tools { background: #fff; border-top: 1px solid var(--line); }
+  .tools .wrap { padding: 56px 24px 48px; }
+  .tools-head { margin-bottom: 26px; }
+  .tools-head h2 {
+    font-family: 'Archivo'; font-weight: 800; font-size: 23px;
+    color: var(--navy); letter-spacing: -0.01em;
+    display: inline-block; padding-bottom: 7px;
+    border-bottom: 3px solid var(--lime);
+  }
+  .tools-head p { color: var(--mute); font-size: 14.5px; margin-top: 10px; }
+
+  /* HomeFundIt promo card */
+  .hfi {
+    display: grid; grid-template-columns: 1.3fr 1fr; gap: 0;
+    border-radius: 16px; overflow: hidden; margin-bottom: 34px;
+    border: 1px solid var(--line);
+  }
+  @media (max-width: 720px) { .hfi { grid-template-columns: 1fr; } }
+  .hfi-left { background: var(--navy); color: #fff; padding: 30px 32px; }
+  .hfi-ey {
+    font-family: 'Archivo'; font-weight: 700; font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--lime);
+    margin-bottom: 12px;
+  }
+  .hfi-left h3 { font-family: 'Archivo'; font-weight: 800; font-size: 22px; line-height: 1.15; margin-bottom: 12px; }
+  .hfi-left p { font-size: 14.5px; color: rgba(255,255,255,0.8); margin-bottom: 10px; }
+  .hfi-right {
+    background: linear-gradient(135deg, var(--teal), #3f8b93);
+    color: #fff; padding: 30px 32px;
+    display: flex; flex-direction: column; justify-content: center; gap: 12px;
+  }
+  .hfi-btn {
+    font-family: 'Archivo'; font-weight: 700; font-size: 14.5px;
+    padding: 13px 20px; border-radius: 10px; text-align: center;
+    transition: transform .15s, background .15s;
+  }
+  .hfi-btn:hover { transform: translateY(-2px); }
+  .hfi-btn.primary { background: var(--lime); color: var(--navy); }
+  .hfi-btn.ghost { background: rgba(255,255,255,0.12); color: #fff; border: 1.5px solid rgba(255,255,255,0.35); }
+  .hfi-note { font-size: 12.5px; color: rgba(255,255,255,0.8); text-align: center; line-height: 1.4; }
+
+  /* calculator wrapper */
+  .calc-head h3 {
+    font-family: 'Archivo'; font-weight: 800; font-size: 18px; color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .calc-head p { color: var(--mute); font-size: 13.5px; margin-bottom: 18px; }
+  .calc-shell {
+    background: #fff; border: 1px solid var(--line); border-radius: 16px;
+    padding: 12px; overflow: hidden;
+  }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="brandmark">
+        <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDM2MCAxMTAuOCI+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5jbHMtMSB7CiAgICAgICAgZmlsbDogI2ZmZmZmZjsKICAgICAgfQoKICAgICAgLmNscy0xLCAuY2xzLTIsIC5jbHMtMywgLmNscy00LCAuY2xzLTUgewogICAgICAgIHN0cm9rZS13aWR0aDogMHB4OwogICAgICB9CgogICAgICAuY2xzLTIgewogICAgICAgIGZpbGw6ICM5MmMxM2U7CiAgICAgIH0KCiAgICAgIC5jbHMtMyB7CiAgICAgICAgZmlsbDogIzMzYTRhYzsKICAgICAgfQoKICAgICAgLmNscy00IHsKICAgICAgICBmaWxsOiAjZmZmZmZmOwogICAgICB9CgogICAgICAuY2xzLTUgewogICAgICAgIGZpbGw6ICNmZmZmZmY7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnPgogICAgPGc+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTEwMi43LDUxLjhoNC40YzIsMCwzLjQsMS41LDMuNCwzLjZzLTEuNCwzLjYtMy40LDMuNmgtMS44djMuMmgtMi42di0xMC41Wk0xMDYuNSw1Ni44Yy45LDAsMS4zLS42LDEuMy0xLjRzLS40LTEuNC0xLjMtMS40aC0xLjN2Mi44aDEuM1oiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNMTEyLjEsNTEuOGgyLjZ2MTAuNWgtMi42di0xMC41WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Ik0xMTcuNCw1MS44aDIuNmwyLjksNC45Yy40LjcuOSwxLjguOSwxLjhoMHMtLjEtMS4xLS4xLTEuOHYtNC45aDIuNnYxMC41aC0yLjZsLTIuOS00LjljLS40LS43LS45LTEuOC0uOS0xLjhoMHMuMSwxLjEuMSwxLjh2NC45aC0yLjZ2LTEwLjVaTTEyMC43LDQ4LjhjMSwwLDEuMy45LDEuOC45cy41LS4zLjUtLjhoMS42YzAsMS41LS42LDIuMi0xLjksMi4ycy0xLjMtLjktMS44LS45LS41LjMtLjUuOGgtMS42YzAtMS41LjYtMi4yLDEuOS0yLjJaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTEzNC4xLDYwLjFoLTMuM2wtLjYsMi4yaC0yLjZsMy42LTEwLjVoMi43bDMuNiwxMC41aC0yLjZsLS42LTIuMlpNMTMyLjUsNTQuMnMtLjIsMS4xLS40LDEuOGwtLjYsMmgyLjFsLS42LTJjLS4yLS43LS40LTEuOC0uNC0xLjhoMFoiLz4KICAgIDwvZz4KICAgIDxnPgogICAgICA8Zz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Ik00Mi4yLDUxLjhoMi44bDEuNSw0LjRjLjIuNy41LDEuNy41LDEuN2gwcy4zLTEuMS41LTEuN2wxLjUtNC40aDIuOGwuOSwxMC41aC0yLjZsLS4zLTQuN2MwLS44LDAtMS44LDAtMS44aDBzLS40LDEuMS0uNiwxLjhsLTEuMSwzaC0yLjJsLTEuMS0zYy0uMi0uNy0uNi0xLjgtLjYtMS44aDBzMCwxLDAsMS44bC0uMyw0LjdoLTIuNmwuOS0xMC41WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTU0LjgsNTEuOGgyLjZ2MTAuNWgtMi42di0xMC41WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTY0LjUsNTEuNmMyLjcsMCw0LDEuNCw0LDEuNGwtMS4yLDEuOXMtMS4xLTEtMi42LTFjLTIuMiwwLTMuMSwxLjQtMy4xLDNzMS40LDMuMiwzLDMuMiwyLjEtLjgsMi4xLS44di0uOGgtMS41di0yLjJoMy44djUuOWgtMi4xdi0uM2MwLS4yLDAtLjQsMC0uNGgwcy0xLC45LTIuOC45Yy0yLjcsMC01LjItMi01LjItNS40czIuMy01LjQsNS41LTUuNFoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Ik03MC43LDUxLjhoMi42djYuNmMwLDEuMS43LDEuNywxLjgsMS43czEuOC0uNiwxLjgtMS43di02LjZoMi42djYuNmMwLDIuNC0xLjcsNC00LjQsNHMtNC40LTEuNy00LjQtNHYtNi42WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTgxLjYsNTEuOGg2LjZ2Mi4yaC00djEuOWgzLjJ2Mi4yaC0zLjJ2Mmg0LjJ2Mi4yaC02Ljh2LTEwLjVaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNOTAuMSw1MS44aDIuNnY4LjNoNC4zdjIuMmgtNi45di0xMC41WiIvPgogICAgICA8L2c+CiAgICAgIDxnPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTQyLjIsNTEuOGgyLjhsMS41LDQuNGMuMi43LjUsMS43LjUsMS43aDBzLjMtMS4xLjUtMS43bDEuNS00LjRoMi44bC45LDEwLjVoLTIuNmwtLjMtNC43YzAtLjgsMC0xLjgsMC0xLjhoMHMtLjQsMS4xLS42LDEuOGwtMS4xLDNoLTIuMmwtMS4xLTNjLS4yLS43LS42LTEuOC0uNi0xLjhoMHMwLDEsMCwxLjhsLS4zLDQuN2gtMi42bC45LTEwLjVaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNNTQuOCw1MS44aDIuNnYxMC41aC0yLjZ2LTEwLjVaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNNjQuNSw1MS42YzIuNywwLDQsMS40LDQsMS40bC0xLjIsMS45cy0xLjEtMS0yLjYtMWMtMi4yLDAtMy4xLDEuNC0zLjEsM3MxLjQsMy4yLDMsMy4yLDIuMS0uOCwyLjEtLjh2LS44aC0xLjV2LTIuMmgzLjh2NS45aC0yLjF2LS4zYzAtLjIsMC0uNCwwLS40aDBzLTEsLjktMi44LjljLTIuNywwLTUuMi0yLTUuMi01LjRzMi4zLTUuNCw1LjUtNS40WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTcwLjcsNTEuOGgyLjZ2Ni42YzAsMS4xLjcsMS43LDEuOCwxLjdzMS44LS42LDEuOC0xLjd2LTYuNmgyLjZ2Ni42YzAsMi40LTEuNyw0LTQuNCw0cy00LjQtMS43LTQuNC00di02LjZaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNODEuNiw1MS44aDYuNnYyLjJoLTR2MS45aDMuMnYyLjJoLTMuMnYyaDQuMnYyLjJoLTYuOHYtMTAuNVoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Ik05MC4xLDUxLjhoMi42djguM2g0LjN2Mi4yaC02Ljl2LTEwLjVaIi8+CiAgICAgIDwvZz4KICAgIDwvZz4KICA8L2c+CiAgPHJlY3QgY2xhc3M9ImNscy0zIiB4PSI0MC43IiB5PSI2Ni43IiB3aWR0aD0iOTcuMyIgaGVpZ2h0PSIxLjgiLz4KICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0yMi42LDQyLjlsLTEyLjksOS4ydjE2LjNoNy40YzIsMCwzLjktLjgsNS4yLTIuMmwuNC0uNC43LjdjMS40LDEuMywzLjEsMiw1LDJoN3YtMTYuM2wtMTIuOC05LjJaTTIyLjcsNjMuNmwtMS41LTEuNCwxLjMtMS4zLDEuNCwxLjQtMS4yLDEuM1pNMjUuMyw1OGMuNS41LjksMSwxLjMsMS40bC0xLjUsMS42LTEuNC0xLjQsMS42LTEuNlpNMjIuNiw1OC41bC0xLjctMS44Yy41LS41LDEtMSwxLjYtMS40LjYuNSwxLjIsMS4xLDEuNywxLjZsLTEuNiwxLjZaTTIxLjQsNTkuNmwtMS4zLDEuNC0xLjctMS43Yy40LS40LjgtLjksMS4zLTEuNWwxLjcsMS44Wk0zMy45LDY2LjloLTUuNWMtMS41LDAtMi45LS42LTMuOS0xLjZsLS43LS43LDEuMi0xLjMsMSwxLC45LTEuMy0uOC0uOCwxLjQtMS42di0yLjFjLS4yLS4yLS42LS43LTEuMy0xLjRsMS4xLTEuMi0uOS0xLjQtMS4zLDEuNGMtLjUtLjUtMS0xLTEuNi0xLjUuMSwwLC4yLS4yLjMtLjJoMHMwLDAsMCwwYzEuNS0xLjEsMy0xLjksNC4xLTEuOSwwLDAsMCwwLDAsMHYtMS41Yy0xLjEsMC0yLjQuNi0zLjcsMS40LjgtMS43LDIuNi0yLjMsMi42LTIuM2wtLjItLjctLjItLjdjLS45LjMtMi4yLDEtMy4xLDIuNHYtMy40aC0xLjV2My4zYy0uOS0xLjMtMi4yLTItMy0yLjNsLS41LDEuNHMyLC43LDIuOCwyLjZjLTEuNS0xLTMtMS43LTQuMi0xLjd2MS41czAsMCwwLDBjMS4yLS4xLDIuOC44LDQuNCwyLjEtLjUuNS0xLC45LTEuNSwxLjNsLTEuMi0xLjMtLjksMS40LDEsMS4xYy0uNy44LTEuMiwxLjMtMS40LDEuNXYyLjFsMS43LDEuNi0uOS45LjksMS4zLDEuMS0xLjEsMS41LDEuNS0uNC40Yy0xLjEsMS4xLTIuNiwxLjgtNC4xLDEuOGgtNS45di0xNGwxMS40LTguMSwxMS4zLDguMXYxNFoiLz4KICA8Zz4KICAgIDxnPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0xOTkuNCw0OS41bC0xLjcsMS4zYy0xLTEuMi0yLjEtMi4yLTMuNC0yLjgtMS4zLS42LTIuOC0xLTQuNC0xcy0zLjQuNC00LjksMS4zLTIuNywyLTMuNSwzLjRjLS44LDEuNC0xLjIsMy0xLjIsNC44LDAsMi43LjksNC45LDIuOCw2LjcsMS44LDEuOCw0LjIsMi43LDcsMi43czUuNy0xLjIsNy43LTMuNmwxLjcsMS4zYy0xLjEsMS40LTIuNSwyLjUtNC4xLDMuMi0xLjYuOC0zLjUsMS4xLTUuNSwxLjEtMy44LDAtNi45LTEuMy05LjEtMy44LTEuOS0yLjItMi44LTQuOC0yLjgtNy44czEuMS01LjksMy40LTguMWMyLjMtMi4yLDUuMS0zLjMsOC41LTMuM3MzLjkuNCw1LjYsMS4yYzEuNy44LDMsMiw0LjEsMy40Ii8+CiAgICAgIDxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIyMDAuMyA2Ny45IDIwMy41IDQ2IDIwMy44IDQ2IDIxMi44IDY0IDIyMS42IDQ2IDIyMiA0NiAyMjUuMSA2Ny45IDIyMyA2Ny45IDIyMC44IDUyLjIgMjEzLjEgNjcuOSAyMTIuNSA2Ny45IDIwNC42IDUyLjEgMjAyLjUgNjcuOSAyMDAuMyA2Ny45Ii8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTI0OC4zLDQ5LjFsLTEuNywxLjZjLTEuMi0xLjItMi42LTIuMS00LTIuNy0xLjUtLjYtMi45LS45LTQuMy0uOXMtMy40LjQtNC45LDEuM2MtMS42LjgtMi44LDItMy42LDMuNC0uOSwxLjQtMS4zLDMtMS4zLDQuNnMuNCwzLjIsMS4zLDQuN2MuOSwxLjUsMi4xLDIuNywzLjcsMy41LDEuNi45LDMuMywxLjMsNS4xLDEuM3M0LjItLjYsNS43LTEuOWMxLjYtMS4zLDIuNS0yLjksMi44LTVoLTd2LTIuMWg5LjVjMCwzLjQtMSw2LjEtMyw4LjEtMiwyLTQuNywzLTgsM3MtNy4zLTEuNC05LjctNC4yYy0xLjgtMi4xLTIuNy00LjYtMi43LTcuNHMuNS00LDEuNi01LjhjMS0xLjgsMi41LTMuMiw0LjMtNC4yLDEuOC0xLDMuOS0xLjUsNi4yLTEuNXMzLjYuMyw1LjMsMWMxLjYuNywzLjIsMS44LDQuOCwzLjIiLz4KICAgIDwvZz4KICAgIDxnPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0yNTIuNyw1Ni44aDEuMXY0LjZoNS42di00LjZoMS4xdjExLjFoLTEuMXYtNS40aC01LjZ2NS40aC0xLjF2LTExLjFaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTI3NC40LDYyLjRjMCwzLjMtMi41LDUuOC01LjgsNS44cy01LjgtMi43LTUuOC01LjgsMi42LTUuOSw1LjgtNS45LDUuOSwyLjUsNS45LDUuOFpNMjYzLjksNjIuNGMwLDIuNywyLjIsNC43LDQuNyw0LjdzNC43LTIsNC43LTQuOC0yLjMtNC43LTQuNy00LjctNC43LDEuOS00LjcsNC44WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0yNzYuMSw2Ny45bDEuNi0xMS4xaC4ybDQuNSw5LjEsNC41LTkuMWguMmwxLjYsMTEuMWgtMS4xbC0xLjEtNy45LTMuOSw3LjloLS4zbC00LTgtMS4xLDhoLTEuMVoiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy00IiBkPSJNMjkwLjgsNTYuOGg2LjN2MS4xaC01LjJ2My41aDUuMnYxLjFoLTUuMnY0LjRoNS4ydjEuMWgtNi4zdi0xMS4xWiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0zMDMuMyw1Ni44aDEuMXYxMGg0LjN2MS4xaC01LjR2LTExLjFaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTMyMC43LDYyLjRjMCwzLjMtMi41LDUuOC01LjgsNS44cy01LjgtMi43LTUuOC01LjgsMi42LTUuOSw1LjgtNS45LDUuOSwyLjUsNS45LDUuOFpNMzEwLjIsNjIuNGMwLDIuNywyLjIsNC43LDQuNyw0LjdzNC43LTIsNC43LTQuOC0yLjMtNC43LTQuNy00LjctNC43LDEuOS00LjcsNC44WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0zMjYuNSw1Ni44bDUuMiwxMS4xaC0xLjJsLTEuNy0zLjZoLTQuOGwtMS43LDMuNmgtMS4ybDUuMi0xMS4xaC4zWk0zMjYuNCw1OS4ybC0xLjksNGgzLjhsLTEuOS00WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0zMzMuNCw2Ny45di0xMS4xaC4ybDcuMyw4LjV2LTguNWgxLjF2MTEuMWgtLjJsLTcuMy04LjR2OC40aC0xLjFaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTM0OS41LDU5LjFjLS42LS44LTEuMS0xLjQtMi0xLjRzLTEuNS43LTEuNSwxLjQuNCwxLjIsMSwxLjdjMi4xLDEuNSwzLjYsMi42LDMuNiw0LjRzLTEuMywzLTMuMSwzLTIuNS0uOC0zLjMtMi4zbC45LS42Yy43LDEuMiwxLjUsMS44LDIuMywxLjhzMi4xLS44LDIuMS0xLjktMS4xLTEuOS0zLjctNGMtLjUtLjQtLjktMS4zLS45LTIuMSwwLTEuNSwxLjItMi42LDIuNy0yLjZzMi4yLjgsMi45LDEuOGwtLjkuN1oiLz4KICAgIDwvZz4KICA8L2c+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIxNTgiIHk9IjM4IiB3aWR0aD0iLjkiIGhlaWdodD0iMzQuMyIvPgo8L3N2Zz4=" alt="Miguel Pi&ntilde;a | CMG Home Loans">
+        <span class="partner">&times;&nbsp;&nbsp;The Austin Home Team</span>
+      </div>
+      <nav class="topnav"><a href="#quick-reference">Quick Reference</a><a href="#buyer-programs">Buyer Programs</a><a href="#investor-specialty">Investor & Specialty</a><a href="#market-education">Market & Education</a><a href="#tools">Tools</a></nav>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Partner toolkit <span class="sep">&middot;</span> <span class="ptr">for The Austin Home Team</span></div>
+      <h1>The lending toolkit, <span class="g">built for your deals.</span></h1>
+      <p class="lede">Every CMG program your buyers and sellers might need &mdash; organized so you can find the right answer fast, send a flyer to a client, or settle a financing question on the spot.</p>
+      <div class="meta">
+        <span><b>Bilingual</b> &middot; English / Espa&ntilde;ol</span>
+        <span><b>11 years</b> in mortgage lending</span>
+        <span><b>(512) 954-1394</b> &middot; mpina@cmghomeloans.com</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    
+    <section class="cat-section" id="quick-reference">
+      <div class="cat-head">
+        <h2>Quick Reference</h2>
+        <p>Fast answers for the table &mdash; Limits, DTI, credit, and seasoning at a glance.</p>
+      </div>
+      <div class="flyer-grid">
+        <a class="flyer" href="flyers/realtor-cheat-sheet.pdf" target="_blank" rel="noopener">
+          <div class="flyer-top">
+            <span class="tag">Quick Reference</span>
+            <span class="open">Open PDF &rarr;</span>
+          </div>
+          <h3>2026 Realtor Cheat Sheet</h3>
+          <p>One-page snapshot of loan limits, down payments, seller contributions, and seasoning requirements across Conventional, FHA, VA, and USDA. The fastest answer to “can my buyer qualify?”</p>
+          <div class="usewhen"><span>Use when</span> Pull this up the moment a buyer question comes up.</div>
+        </a>
+        <a class="flyer" href="flyers/loan-cheat-sheet.pdf" target="_blank" rel="noopener">
+          <div class="flyer-top">
+            <span class="tag">Quick Reference</span>
+            <span class="open">Open PDF &rarr;</span>
+          </div>
+          <h3>2026 Loan Cheat Sheet</h3>
+          <p>Deeper side-by-side of all five loan types — credit scores, down payments, MI, manufactured-home rules, and the property-condition gotchas (handrails, well/septic, road maintenance) that derail closings.</p>
+          <div class="usewhen"><span>Use when</span> When a property’s condition or a buyer’s profile is unusual.</div>
+        </a>
+        <a class="flyer" href="flyers/quick-loan-reference.pdf" target="_blank" rel="noopener">
+          <div class="flyer-top">
+            <span class="tag">Quick Reference</span>
+            <span class="open">Open PDF &rarr;</span>
+          </div>
+          <h3>2026 Quick Loan Reference Guide</h3>
+          <p>Occupancy, down payment, MI, DTI, and minimum credit by program, plus 2026 conforming and FHA loan limits by unit count. Includes bankruptcy and foreclosure waiting periods.</p>
+          <div class="usewhen"><span>Use when</span> Quick limit and DTI lookups for any scenario.</div>
+        </a>
+        <a class="flyer" href="flyers/product-reference-guide.pdf" target="_blank" rel="noopener">
+          <div class="flyer-top">
+            <span class="tag">Quick Reference</span>
+            <span class="open">Open PDF &rarr;</span>
+          </div>
+          <h3>Product Reference Guide</h3>
+          <p>The full menu of CMG programs in one place — from All In One Loan and HomeFundIt to bank-statement, 1099-only, asset-qualifier, reverse, and builder tools. A map of everything I can do.</p>
+          <div class="usewhen"><span>Use when</span> When you’re not sure a program exists — it probably does.</div>
+        </a>
+        <a class="flyer" href="flyers/closing-costs-explained.pdf" target="_blank" rel="noopener">
+          <div class="flyer-top">
+            <span class="tag">Quick Reference</span>
+            <span class="open">Open PDF &rarr;</span>
+          </div>
+          <h3>Closing Costs Explained</h3>
+          <p>A plain-English rundown of the common closing costs — origination, appraisal, title/escrow, recording, daily interest, and the tax and insurance escrows. Great for setting buyer expectations early.</p>
+          <div class="usewhen"><span>Use when</span> Buyers asking “what are all these fees?”</div>
+        </a>
+        <a class="flyer" href="flyers/three-day-disclosure-rule.pdf" target="_blank" rel="noopener">
+          <div class="flyer-top">
+            <span class="tag">Quick Reference</span>
+            <span class="open">Open PDF &rarr;</span>
+          </div>
+          <h3>The Three-Day Disclosure Rule</h3>
+          <p>A visual chart of the TRID 3-day rule — by closing day, when the buyer must receive the Closing Disclosure and when it must be mailed. Pairs with the CD timing tool below.</p>
+          <div class="usewhen"><span>Use when</span> Planning a closing timeline.</div>
+        </a>
+        <a class="flyer" href="flyers/loan-document-checklist.pdf" target="_blank" rel="noopener">
+          <div class="flyer-top">
+            <span class="tag">Quick Reference</span>
+            <span class="open">Open PDF &rarr;</span>
+          </div>
+          <h3>Loan Document Checklist</h3>
+          <p>Everything a buyer needs to gather, split for salaried/hourly and self-employed borrowers — IDs, pay stubs, W2s/1099s, tax returns, and asset statements. Speeds up the whole process.</p>
+          <div class="usewhen"><span>Use when</span> Send the moment a buyer is ready to apply.</div>
+        </a></div>
+    </section>
+    <section class="cat-section" id="buyer-programs">
+      <div class="cat-head">
+        <h2>Buyer Programs</h2>
+        <p>Get more buyers to the table &mdash; Low-down, future-income, and second-chance paths.</p>
+      </div>
+      <div class="flyer-grid">
+        <a class="flyer" href="flyers/community-one-dpa.pdf" target="_blank" rel="noopener">
+          <div class="flyer-top">
+            <span class="tag">Buyer Programs</span>
+            <span class="open">Open PDF &rarr;</span>
+          </div>
+          <h3>CMG Community ONE — Down Payment Assistance</h3>
+          <p>A 2% grant up to $6,000 with down payments as low as 1%, paired with HomeReady or Home Possible. Built to get more first-time buyers to the closing table.</p>
+          <div class="usewhen"><span>Use when</span> First-time and budget-conscious buyers.</div>
+        </a>
+        <a class="flyer" href="flyers/graduate-advantage.pdf" target="_blank" rel="noopener">
+          <div class="flyer-top">
+            <span class="tag">Buyer Programs</span>
+            <span class="open">Open PDF &rarr;</span>
+          </div>
+          <h3>CMG Graduate Advantage</h3>
+          <p>Recent grads in medical, legal, engineering, architecture, or accounting can qualify on future income with a signed offer letter — up to 90% financing and $1.5M, no current income needed.</p>
+          <div class="usewhen"><span>Use when</span> New professionals with a job offer but little history.</div>
+        </a>
+        <a class="flyer" href="flyers/medpro-doctors.pdf" target="_blank" rel="noopener">
+          <div class="flyer-top">
+            <span class="tag">Buyer Programs</span>
+            <span class="open">Open PDF &rarr;</span>
+          </div>
+          <h3>CMG MedPro — No Down Payment for Doctors</h3>
+          <p>No down payment and no mortgage insurance for eligible physicians, dentists, vets, CRNAs, residents, and fellows. One occupying borrower must be practicing in their field.</p>
+          <div class="usewhen"><span>Use when</span> Medical professionals — a strong relocation niche.</div>
+        </a>
+        <a class="flyer" href="flyers/second-look.pdf" target="_blank" rel="noopener">
+          <div class="flyer-top">
+            <span class="tag">Buyer Programs</span>
+            <span class="open">Open PDF &rarr;</span>
+          </div>
+          <h3>Not Approved? Let’s Take a Second Look</h3>
+          <p>A turned-down buyer isn’t a dead lead. Covers our full loan menu plus Texas DPA — HomeFundIt, TSAHC, TDHCA, FHA Buyer’s Choice, and MedPro — for buyers another lender passed on.</p>
+          <div class="usewhen"><span>Use when</span> Any buyer who heard “no” somewhere else.</div>
+        </a></div>
+    </section>
+    <section class="cat-section" id="investor-specialty">
+      <div class="cat-head">
+        <h2>Investor & Specialty</h2>
+        <p>For portfolios and tough listings &mdash; DSCR, renovation, and creative rate tools.</p>
+      </div>
+      <div class="flyer-grid">
+        <a class="flyer" href="flyers/dscr-investor-loans.pdf" target="_blank" rel="noopener">
+          <div class="flyer-top">
+            <span class="tag">Investor & Specialty</span>
+            <span class="open">Open PDF &rarr;</span>
+          </div>
+          <h3>DSCR Loans for Investors</h3>
+          <p>Qualify on the property’s rental income — no W2s or tax returns. Seven DSCR options up to $3M and 85% LTV for single-family, multi-unit, and short-term rentals.</p>
+          <div class="usewhen"><span>Use when</span> Investor clients building a portfolio.</div>
+        </a>
+        <a class="flyer" href="flyers/renovation-lending.pdf" target="_blank" rel="noopener">
+          <div class="flyer-top">
+            <span class="tag">Investor & Specialty</span>
+            <span class="open">Open PDF &rarr;</span>
+          </div>
+          <h3>Renovation Lending Guide</h3>
+          <p>Turn a dated listing into a buyer’s dream. Full breakdown of FHA 203(k), Limited 203(k), HomeStyle, and VA Renovation — how each works, what’s allowed, and how draws are funded.</p>
+          <div class="usewhen"><span>Use when</span> Hard-to-move listings or buyers who want to customize.</div>
+        </a>
+        <a class="flyer" href="flyers/list-and-lock.pdf" target="_blank" rel="noopener">
+          <div class="flyer-top">
+            <span class="tag">Investor & Specialty</span>
+            <span class="open">Open PDF &rarr;</span>
+          </div>
+          <h3>List & Lock</h3>
+          <p>A modern alternative to price cuts and buydowns. Sellers earn a credit up to $5,000, buyers lock a lower rate, and CMG kicks in an extra 1%. A listing-appointment differentiator.</p>
+          <div class="usewhen"><span>Use when</span> Listing presentations and rate-sensitive buyers.</div>
+        </a>
+        <a class="flyer" href="flyers/cash-offer-programs.pdf" target="_blank" rel="noopener">
+          <div class="flyer-top">
+            <span class="tag">Investor & Specialty</span>
+            <span class="open">Open PDF &rarr;</span>
+          </div>
+          <h3>Cash Offer Programs</h3>
+          <p>Help buyers compete like cash with Knock, Zavvie, and Zoom Casa — bridge loans, all-cash offers on the next home, and buy-before-you-sell options. Includes program comparisons and coverage.</p>
+          <div class="usewhen"><span>Use when</span> Buyers who need to win a bidding war or move before selling.</div>
+        </a></div>
+    </section>
+    <section class="cat-section" id="market-education">
+      <div class="cat-head">
+        <h2>Market & Education</h2>
+        <p>Share-pieces that build trust &mdash; Data and updates to reassure and inform.</p>
+      </div>
+      <div class="flyer-grid">
+        <a class="flyer" href="flyers/condo-financing-updates.pdf" target="_blank" rel="noopener">
+          <div class="flyer-top">
+            <span class="tag">Market & Education</span>
+            <span class="open">Open PDF &rarr;</span>
+          </div>
+          <h3>Conventional Condo Financing Updates</h3>
+          <p>Fannie/Freddie loosened condo insurance and project-review rules in 2026 — more condo projects now qualify for conventional financing with as little as 3% down.</p>
+          <div class="usewhen"><span>Use when</span> Condo deals that stalled on project eligibility.</div>
+        </a>
+        <a class="flyer" href="flyers/homeownership-wealth.pdf" target="_blank" rel="noopener">
+          <div class="flyer-top">
+            <span class="tag">Market & Education</span>
+            <span class="open">Open PDF &rarr;</span>
+          </div>
+          <h3>Why Homeownership Builds Wealth</h3>
+          <p>80+ years of U.S. home-price history — a 71-6-5 record since 1944 — to reassure buyers waiting for a crash that never comes. Great share-piece for fence-sitters.</p>
+          <div class="usewhen"><span>Use when</span> Buyers paralyzed by “prices have to drop.”</div>
+        </a></div>
+    </section>
+  </main>
+
+
+  <section class="tools" id="tools">
+    <div class="wrap">
+      <div class="tools-head">
+        <h2>Tools for you &amp; your clients</h2>
+        <p>Two things worth bookmarking &mdash; a down-payment gifting platform you can offer buyers, and a live payment calculator you can run on the spot.</p>
+      </div>
+
+      <div class="hfi">
+        <div class="hfi-left">
+          <div class="hfi-ey">HomeFundIt&trade; &middot; Down-payment gifting</div>
+          <h3>Help buyers crowdfund their down payment</h3>
+          <p>HomeFundIt lets buyers raise down-payment gifts from family and friends &mdash; and can add matching funds toward closing costs. A real edge for first-time buyers who have the income but not the savings yet.</p>
+          <p>As my partner, you get your own realtor portal to refer buyers directly.</p>
+        </div>
+        <div class="hfi-right">
+          <a class="hfi-btn primary" href="https://realtor.homefundit.com/los/MiguelPinaJr" target="_blank" rel="noopener">Open the realtor portal &rarr;</a>
+          <a class="hfi-btn ghost" href="https://www.homefundit.com" target="_blank" rel="noopener">Learn how HomeFundIt works</a>
+          <div class="hfi-note">Refers buyers to me, Miguel Pi&ntilde;a, at CMG Home Loans.</div>
+        </div>
+      </div>
+
+      <div class="calc-head">
+        <h3>Mortgage payment calculator</h3>
+        <p>Estimate principal, interest, taxes, and insurance &mdash; then apply or reach out right from the tool.</p>
+      </div>
+      <div class="calc-shell">
+        <section id="calculator" class="calculator-section"></section>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <h2>Have a deal that needs a <span class="g">creative path?</span></h2>
+      <p>Send it my way. If there's a way to structure it, we'll find it together &mdash; usually same day.</p>
+      <div class="btns">
+        <a class="btn btn-lime" href="tel:+15129541394">Call (512) 954-1394</a>
+        <a class="btn btn-out" href="mailto:mpina@cmghomeloans.com">Email me a scenario</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-id">
+        <img class="foot-logo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDM2MCAxMTAuOCI+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5jbHMtMSB7CiAgICAgICAgZmlsbDogI2ZmZmZmZjsKICAgICAgfQoKICAgICAgLmNscy0xLCAuY2xzLTIsIC5jbHMtMywgLmNscy00LCAuY2xzLTUgewogICAgICAgIHN0cm9rZS13aWR0aDogMHB4OwogICAgICB9CgogICAgICAuY2xzLTIgewogICAgICAgIGZpbGw6ICM5MmMxM2U7CiAgICAgIH0KCiAgICAgIC5jbHMtMyB7CiAgICAgICAgZmlsbDogIzMzYTRhYzsKICAgICAgfQoKICAgICAgLmNscy00IHsKICAgICAgICBmaWxsOiAjZmZmZmZmOwogICAgICB9CgogICAgICAuY2xzLTUgewogICAgICAgIGZpbGw6ICNmZmZmZmY7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnPgogICAgPGc+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTEwMi43LDUxLjhoNC40YzIsMCwzLjQsMS41LDMuNCwzLjZzLTEuNCwzLjYtMy40LDMuNmgtMS44djMuMmgtMi42di0xMC41Wk0xMDYuNSw1Ni44Yy45LDAsMS4zLS42LDEuMy0xLjRzLS40LTEuNC0xLjMtMS40aC0xLjN2Mi44aDEuM1oiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNMTEyLjEsNTEuOGgyLjZ2MTAuNWgtMi42di0xMC41WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Ik0xMTcuNCw1MS44aDIuNmwyLjksNC45Yy40LjcuOSwxLjguOSwxLjhoMHMtLjEtMS4xLS4xLTEuOHYtNC45aDIuNnYxMC41aC0yLjZsLTIuOS00LjljLS40LS43LS45LTEuOC0uOS0xLjhoMHMuMSwxLjEuMSwxLjh2NC45aC0yLjZ2LTEwLjVaTTEyMC43LDQ4LjhjMSwwLDEuMy45LDEuOC45cy41LS4zLjUtLjhoMS42YzAsMS41LS42LDIuMi0xLjksMi4ycy0xLjMtLjktMS44LS45LS41LjMtLjUuOGgtMS42YzAtMS41LjYtMi4yLDEuOS0yLjJaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTEzNC4xLDYwLjFoLTMuM2wtLjYsMi4yaC0yLjZsMy42LTEwLjVoMi43bDMuNiwxMC41aC0yLjZsLS42LTIuMlpNMTMyLjUsNTQuMnMtLjIsMS4xLS40LDEuOGwtLjYsMmgyLjFsLS42LTJjLS4yLS43LS40LTEuOC0uNC0xLjhoMFoiLz4KICAgIDwvZz4KICAgIDxnPgogICAgICA8Zz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Ik00Mi4yLDUxLjhoMi44bDEuNSw0LjRjLjIuNy41LDEuNy41LDEuN2gwcy4zLTEuMS41LTEuN2wxLjUtNC40aDIuOGwuOSwxMC41aC0yLjZsLS4zLTQuN2MwLS44LDAtMS44LDAtMS44aDBzLS40LDEuMS0uNiwxLjhsLTEuMSwzaC0yLjJsLTEuMS0zYy0uMi0uNy0uNi0xLjgtLjYtMS44aDBzMCwxLDAsMS44bC0uMyw0LjdoLTIuNmwuOS0xMC41WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTU0LjgsNTEuOGgyLjZ2MTAuNWgtMi42di0xMC41WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTY0LjUsNTEuNmMyLjcsMCw0LDEuNCw0LDEuNGwtMS4yLDEuOXMtMS4xLTEtMi42LTFjLTIuMiwwLTMuMSwxLjQtMy4xLDNzMS40LDMuMiwzLDMuMiwyLjEtLjgsMi4xLS44di0uOGgtMS41di0yLjJoMy44djUuOWgtMi4xdi0uM2MwLS4yLDAtLjQsMC0uNGgwcy0xLC45LTIuOC45Yy0yLjcsMC01LjItMi01LjItNS40czIuMy01LjQsNS41LTUuNFoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Ik03MC43LDUxLjhoMi42djYuNmMwLDEuMS43LDEuNywxLjgsMS43czEuOC0uNiwxLjgtMS43di02LjZoMi42djYuNmMwLDIuNC0xLjcsNC00LjQsNHMtNC40LTEuNy00LjQtNHYtNi42WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTgxLjYsNTEuOGg2LjZ2Mi4yaC00djEuOWgzLjJ2Mi4yaC0zLjJ2Mmg0LjJ2Mi4yaC02Ljh2LTEwLjVaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNOTAuMSw1MS44aDIuNnY4LjNoNC4zdjIuMmgtNi45di0xMC41WiIvPgogICAgICA8L2c+CiAgICAgIDxnPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTQyLjIsNTEuOGgyLjhsMS41LDQuNGMuMi43LjUsMS43LjUsMS43aDBzLjMtMS4xLjUtMS43bDEuNS00LjRoMi44bC45LDEwLjVoLTIuNmwtLjMtNC43YzAtLjgsMC0xLjgsMC0xLjhoMHMtLjQsMS4xLS42LDEuOGwtMS4xLDNoLTIuMmwtMS4xLTNjLS4yLS43LS42LTEuOC0uNi0xLjhoMHMwLDEsMCwxLjhsLS4zLDQuN2gtMi42bC45LTEwLjVaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNNTQuOCw1MS44aDIuNnYxMC41aC0yLjZ2LTEwLjVaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNNjQuNSw1MS42YzIuNywwLDQsMS40LDQsMS40bC0xLjIsMS45cy0xLjEtMS0yLjYtMWMtMi4yLDAtMy4xLDEuNC0zLjEsM3MxLjQsMy4yLDMsMy4yLDIuMS0uOCwyLjEtLjh2LS44aC0xLjV2LTIuMmgzLjh2NS45aC0yLjF2LS4zYzAtLjIsMC0uNCwwLS40aDBzLTEsLjktMi44LjljLTIuNywwLTUuMi0yLTUuMi01LjRzMi4zLTUuNCw1LjUtNS40WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTcwLjcsNTEuOGgyLjZ2Ni42YzAsMS4xLjcsMS43LDEuOCwxLjdzMS44LS42LDEuOC0xLjd2LTYuNmgyLjZ2Ni42YzAsMi40LTEuNyw0LTQuNCw0cy00LjQtMS43LTQuNC00di02LjZaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNODEuNiw1MS44aDYuNnYyLjJoLTR2MS45aDMuMnYyLjJoLTMuMnYyaDQuMnYyLjJoLTYuOHYtMTAuNVoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Ik05MC4xLDUxLjhoMi42djguM2g0LjN2Mi4yaC02Ljl2LTEwLjVaIi8+CiAgICAgIDwvZz4KICAgIDwvZz4KICA8L2c+CiAgPHJlY3QgY2xhc3M9ImNscy0zIiB4PSI0MC43IiB5PSI2Ni43IiB3aWR0aD0iOTcuMyIgaGVpZ2h0PSIxLjgiLz4KICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0yMi42LDQyLjlsLTEyLjksOS4ydjE2LjNoNy40YzIsMCwzLjktLjgsNS4yLTIuMmwuNC0uNC43LjdjMS40LDEuMywzLjEsMiw1LDJoN3YtMTYuM2wtMTIuOC05LjJaTTIyLjcsNjMuNmwtMS41LTEuNCwxLjMtMS4zLDEuNCwxLjQtMS4yLDEuM1pNMjUuMyw1OGMuNS41LjksMSwxLjMsMS40bC0xLjUsMS42LTEuNC0xLjQsMS42LTEuNlpNMjIuNiw1OC41bC0xLjctMS44Yy41LS41LDEtMSwxLjYtMS40LjYuNSwxLjIsMS4xLDEuNywxLjZsLTEuNiwxLjZaTTIxLjQsNTkuNmwtMS4zLDEuNC0xLjctMS43Yy40LS40LjgtLjksMS4zLTEuNWwxLjcsMS44Wk0zMy45LDY2LjloLTUuNWMtMS41LDAtMi45LS42LTMuOS0xLjZsLS43LS43LDEuMi0xLjMsMSwxLC45LTEuMy0uOC0uOCwxLjQtMS42di0yLjFjLS4yLS4yLS42LS43LTEuMy0xLjRsMS4xLTEuMi0uOS0xLjQtMS4zLDEuNGMtLjUtLjUtMS0xLTEuNi0xLjUuMSwwLC4yLS4yLjMtLjJoMHMwLDAsMCwwYzEuNS0xLjEsMy0xLjksNC4xLTEuOSwwLDAsMCwwLDAsMHYtMS41Yy0xLjEsMC0yLjQuNi0zLjcsMS40LjgtMS43LDIuNi0yLjMsMi42LTIuM2wtLjItLjctLjItLjdjLS45LjMtMi4yLDEtMy4xLDIuNHYtMy40aC0xLjV2My4zYy0uOS0xLjMtMi4yLTItMy0yLjNsLS41LDEuNHMyLC43LDIuOCwyLjZjLTEuNS0xLTMtMS43LTQuMi0xLjd2MS41czAsMCwwLDBjMS4yLS4xLDIuOC44LDQuNCwyLjEtLjUuNS0xLC45LTEuNSwxLjNsLTEuMi0xLjMtLjksMS40LDEsMS4xYy0uNy44LTEuMiwxLjMtMS40LDEuNXYyLjFsMS43LDEuNi0uOS45LjksMS4zLDEuMS0xLjEsMS41LDEuNS0uNC40Yy0xLjEsMS4xLTIuNiwxLjgtNC4xLDEuOGgtNS45di0xNGwxMS40LTguMSwxMS4zLDguMXYxNFoiLz4KICA8Zz4KICAgIDxnPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0xOTkuNCw0OS41bC0xLjcsMS4zYy0xLTEuMi0yLjEtMi4yLTMuNC0yLjgtMS4zLS42LTIuOC0xLTQuNC0xcy0zLjQuNC00LjksMS4zLTIuNywyLTMuNSwzLjRjLS44LDEuNC0xLjIsMy0xLjIsNC44LDAsMi43LjksNC45LDIuOCw2LjcsMS44LDEuOCw0LjIsMi43LDcsMi43czUuNy0xLjIsNy43LTMuNmwxLjcsMS4zYy0xLjEsMS40LTIuNSwyLjUtNC4xLDMuMi0xLjYuOC0zLjUsMS4xLTUuNSwxLjEtMy44LDAtNi45LTEuMy05LjEtMy44LTEuOS0yLjItMi44LTQuOC0yLjgtNy44czEuMS01LjksMy40LTguMWMyLjMtMi4yLDUuMS0zLjMsOC41LTMuM3MzLjkuNCw1LjYsMS4yYzEuNy44LDMsMiw0LjEsMy40Ii8+CiAgICAgIDxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIyMDAuMyA2Ny45IDIwMy41IDQ2IDIwMy44IDQ2IDIxMi44IDY0IDIyMS42IDQ2IDIyMiA0NiAyMjUuMSA2Ny45IDIyMyA2Ny45IDIyMC44IDUyLjIgMjEzLjEgNjcuOSAyMTIuNSA2Ny45IDIwNC42IDUyLjEgMjAyLjUgNjcuOSAyMDAuMyA2Ny45Ii8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTI0OC4zLDQ5LjFsLTEuNywxLjZjLTEuMi0xLjItMi42LTIuMS00LTIuNy0xLjUtLjYtMi45LS45LTQuMy0uOXMtMy40LjQtNC45LDEuM2MtMS42LjgtMi44LDItMy42LDMuNC0uOSwxLjQtMS4zLDMtMS4zLDQuNnMuNCwzLjIsMS4zLDQuN2MuOSwxLjUsMi4xLDIuNywzLjcsMy41LDEuNi45LDMuMywxLjMsNS4xLDEuM3M0LjItLjYsNS43LTEuOWMxLjYtMS4zLDIuNS0yLjksMi44LTVoLTd2LTIuMWg5LjVjMCwzLjQtMSw2LjEtMyw4LjEtMiwyLTQuNywzLTgsM3MtNy4zLTEuNC05LjctNC4yYy0xLjgtMi4xLTIuNy00LjYtMi43LTcuNHMuNS00LDEuNi01LjhjMS0xLjgsMi41LTMuMiw0LjMtNC4yLDEuOC0xLDMuOS0xLjUsNi4yLTEuNXMzLjYuMyw1LjMsMWMxLjYuNywzLjIsMS44LDQuOCwzLjIiLz4KICAgIDwvZz4KICAgIDxnPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0yNTIuNyw1Ni44aDEuMXY0LjZoNS42di00LjZoMS4xdjExLjFoLTEuMXYtNS40aC01LjZ2NS40aC0xLjF2LTExLjFaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTI3NC40LDYyLjRjMCwzLjMtMi41LDUuOC01LjgsNS44cy01LjgtMi43LTUuOC01LjgsMi42LTUuOSw1LjgtNS45LDUuOSwyLjUsNS45LDUuOFpNMjYzLjksNjIuNGMwLDIuNywyLjIsNC43LDQuNyw0LjdzNC43LTIsNC43LTQuOC0yLjMtNC43LTQuNy00LjctNC43LDEuOS00LjcsNC44WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0yNzYuMSw2Ny45bDEuNi0xMS4xaC4ybDQuNSw5LjEsNC41LTkuMWguMmwxLjYsMTEuMWgtMS4xbC0xLjEtNy45LTMuOSw3LjloLS4zbC00LTgtMS4xLDhoLTEuMVoiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy00IiBkPSJNMjkwLjgsNTYuOGg2LjN2MS4xaC01LjJ2My41aDUuMnYxLjFoLTUuMnY0LjRoNS4ydjEuMWgtNi4zdi0xMS4xWiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0zMDMuMyw1Ni44aDEuMXYxMGg0LjN2MS4xaC01LjR2LTExLjFaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTMyMC43LDYyLjRjMCwzLjMtMi41LDUuOC01LjgsNS44cy01LjgtMi43LTUuOC01LjgsMi42LTUuOSw1LjgtNS45LDUuOSwyLjUsNS45LDUuOFpNMzEwLjIsNjIuNGMwLDIuNywyLjIsNC43LDQuNyw0LjdzNC43LTIsNC43LTQuOC0yLjMtNC43LTQuNy00LjctNC43LDEuOS00LjcsNC44WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0zMjYuNSw1Ni44bDUuMiwxMS4xaC0xLjJsLTEuNy0zLjZoLTQuOGwtMS43LDMuNmgtMS4ybDUuMi0xMS4xaC4zWk0zMjYuNCw1OS4ybC0xLjksNGgzLjhsLTEuOS00WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0zMzMuNCw2Ny45di0xMS4xaC4ybDcuMyw4LjV2LTguNWgxLjF2MTEuMWgtLjJsLTcuMy04LjR2OC40aC0xLjFaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTM0OS41LDU5LjFjLS42LS44LTEuMS0xLjQtMi0xLjRzLTEuNS43LTEuNSwxLjQuNCwxLjIsMSwxLjdjMi4xLDEuNSwzLjYsMi42LDMuNiw0LjRzLTEuMywzLTMuMSwzLTIuNS0uOC0zLjMtMi4zbC45LS42Yy43LDEuMiwxLjUsMS44LDIuMywxLjhzMi4xLS44LDIuMS0xLjktMS4xLTEuOS0zLjctNGMtLjUtLjQtLjktMS4zLS45LTIuMSwwLTEuNSwxLjItMi42LDIuNy0yLjZzMi4yLjgsMi45LDEuOGwtLjkuN1oiLz4KICAgIDwvZz4KICA8L2c+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIxNTgiIHk9IjM4IiB3aWR0aD0iLjkiIGhlaWdodD0iMzQuMyIvPgo8L3N2Zz4=" alt="Miguel Pi&ntilde;a | CMG Home Loans">
+        <div><b>Miguel Pi&ntilde;a</b> &middot; Loan Officer &middot; NMLS# 1570598 &middot; Branch NMLS# 1151668</div>
+      </div>
+      <div class="disc">CMG Mortgage, Inc. dba CMG Home Loans, NMLS# 1820. Equal Housing Opportunity. Registered Mortgage Banker with the Texas Department of Savings and Mortgage Lending. Some products may have higher rates, points, or fees. This is not a commitment to lend. Terms subject to change.</div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://www.cmgfi.com/CMGCalc.css">
+  <script src="https://www.cmgfi.com/CMGCalc.bundle.js"></script>
+  <script>
+    var settings = {tabs:{Highcharts:{column:{Interest:'#138890',Principal:'#3DABB2'},pie:{Principal:'#138890',Interest:'#9CC846',Taxes:'#2A343D',Insurance:'#9B9B9B',MortgageInsurance:'#32A4AC'}},buttonColor:'#9AC125',highlightedTextColor:'#138890',highlightedTextColorLight:'#32A4AC',headerColor:'#138890',lo:'true',loName:'Miguel Pina',loTitle:'Loan Officer | He/Him',loNmls:'1570598',loImageurl:'https://cloud.cmgfi.com/dvbdysuf5/a_exif,f_auto,g_faces,c_thumb,w_68,h_68,z_0.5,r_max,bo_3px_solid_white/CMG_Web_Resources/LO_Images/Production_2227_Miguel_Pina',loLocation:'Austin, TX',loPhone:'(512) 954-1394',loEmail:'mpina@cmghomeloans.com',loMysite:'https://www.cmghomeloans.com/mysite/miguel-pina-jr',loApplynow:'https://secure.cmghomeloans.com/apply?id=221224',loLogo:'https://cloud.cmgfi.com/dvbdysuf5/image/upload/v1652370622/JV_Web_Resources/CMGHL/Navigation_Images/Logo.svg'}};
+    var params = {navigateMode:true,calcMode:'Mortgage',footnote:true,amortTab:true,displayLO:true};
+    window.addEventListener('load', function () {
+      try {
+        var calc = new CMGCalc($('#calculator'), params, settings);
+        calc.init();
+      } catch (e) { console.error('Calculator failed to load:', e); }
+    });
+  </script>
+</body>
+</html>

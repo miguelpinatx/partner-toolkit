@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lending Toolkit &mdash; Miguel Pi&ntilde;a, CMG Home Loans</title>
+<meta name="description" content="Every CMG home-loan program your buyers and sellers might need, in one place. Curated by Miguel Piña, CMG Home Loans.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #2C343C;
+    --lime: #92C13A;
+    --teal: #56A2AA;
+    --ink: #1d2329;
+    --mute: #66707a;
+    --line: #e6e9ec;
+    --bg: #f6f7f8;
+    --card: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- top bar ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(44,52,60,0.97); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 20px; }
+  .brandmark { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+  .brandmark img { height: 32px; display: block; }
+  .brandmark .partner {
+    font-family: 'Archivo'; font-weight: 600; color: rgba(255,255,255,0.82);
+    font-size: 13px; letter-spacing: 0.01em;
+    padding-left: 14px; border-left: 1px solid rgba(255,255,255,0.22);
+  }
+  @media (max-width: 1180px) { .brandmark .partner { display: none; } }
+  .topnav { display: flex; align-items: center; gap: 18px; flex: 1; justify-content: flex-end; }
+  .topnav a {
+    color: rgba(255,255,255,0.72); font-size: 13px; font-weight: 500;
+    transition: color .15s; white-space: nowrap;
+  }
+  .topnav a:hover { color: #fff; }
+  .topnav .nav-cta { margin-left: 4px; }
+  @media (max-width: 980px) { .topnav a:not(.nav-cta) { display: none; } }
+
+  /* ---------- hero ---------- */
+  .hero {
+    background: var(--navy); color: #fff;
+    position: relative; overflow: hidden;
+    padding: 70px 0 78px;
+  }
+  .hero::before {
+    content: ""; position: absolute; right: -120px; top: -120px;
+    width: 420px; height: 420px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(146,193,58,0.22), transparent 65%);
+  }
+  .hero::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px;
+    background: linear-gradient(90deg, var(--lime), var(--teal));
+  }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: 'Archivo'; font-weight: 700; font-size: 12px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--lime); margin-bottom: 22px;
+  }
+  .eyebrow .sep { color: rgba(255,255,255,0.35); font-weight: 400; }
+  .eyebrow .ptr { color: rgba(255,255,255,0.85); }
+  .hero h1 {
+    font-family: 'Archivo'; font-weight: 900;
+    font-size: clamp(34px, 6vw, 58px); line-height: 1.02;
+    letter-spacing: -0.02em; max-width: 14ch;
+  }
+  .hero h1 .g { color: var(--lime); }
+  .hero .lede {
+    margin-top: 20px; max-width: 56ch;
+    font-size: 17px; color: rgba(255,255,255,0.8);
+  }
+  .hero .meta {
+    margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px 26px;
+    font-size: 13.5px; color: rgba(255,255,255,0.6);
+  }
+  .hero .meta b { color: rgba(255,255,255,0.92); font-weight: 600; }
+
+  /* ---------- stat strip ---------- */
+  .stats {
+    background: var(--teal); color: #fff;
+  }
+  .stats .wrap { display: flex; flex-wrap: wrap; }
+  .stat { flex: 1 1 0; min-width: 150px; padding: 20px 0; }
+  .stat + .stat { border-left: 1px solid rgba(255,255,255,0.18); padding-left: 24px; }
+  .stat .n { font-family: 'Archivo'; font-weight: 800; font-size: 26px; line-height: 1; }
+  .stat .l { font-size: 12.5px; color: rgba(255,255,255,0.85); margin-top: 5px; }
+
+  /* ---------- sections ---------- */
+  main { padding: 56px 0 40px; }
+  .cat-section { margin-bottom: 52px; scroll-margin-top: 76px; }
+  .cat-head { margin-bottom: 22px; }
+  .cat-head h2 {
+    font-family: 'Archivo'; font-weight: 800; font-size: 23px;
+    color: var(--navy); letter-spacing: -0.01em;
+    display: inline-block; padding-bottom: 7px;
+    border-bottom: 3px solid var(--lime);
+  }
+  .cat-head p { color: var(--mute); font-size: 14.5px; margin-top: 10px; }
+
+  .flyer-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+  }
+  @media (max-width: 720px) { .flyer-grid { grid-template-columns: 1fr; } }
+
+  .flyer {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 20px 22px 18px;
+    display: flex; flex-direction: column;
+    transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+  }
+  .flyer:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(44,52,60,0.12);
+    border-color: var(--teal);
+  }
+  .flyer-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .tag {
+    font-family: 'Archivo'; font-size: 10px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--teal); background: rgba(86,162,170,0.1);
+    padding: 4px 9px; border-radius: 999px;
+  }
+  .open { font-size: 12.5px; font-weight: 600; color: var(--lime); opacity: 0; transition: opacity .16s; }
+  .flyer:hover .open { opacity: 1; }
+  .flyer h3 {
+    font-family: 'Archivo'; font-weight: 700; font-size: 17.5px;
+    color: var(--ink); line-height: 1.2; margin-bottom: 8px;
+  }
+  .flyer p { font-size: 14px; color: var(--mute); flex: 1; }
+  .usewhen {
+    margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line);
+    font-size: 12.5px; color: var(--ink);
+  }
+  .usewhen span {
+    font-family: 'Archivo'; font-weight: 700; font-size: 10px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--navy); margin-right: 6px;
+  }
+
+  /* ---------- CTA / footer ---------- */
+  .cta {
+    background: var(--navy); color: #fff; margin-top: 20px;
+  }
+  .cta .wrap { padding: 52px 24px; text-align: center; }
+  .cta h2 { font-family: 'Archivo'; font-weight: 800; font-size: 28px; letter-spacing: -0.01em; }
+  .cta h2 .g { color: var(--lime); }
+  .cta p { color: rgba(255,255,255,0.75); margin: 12px auto 26px; max-width: 48ch; font-size: 15.5px; }
+  .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    font-family: 'Archivo'; font-weight: 700; font-size: 14.5px;
+    padding: 13px 24px; border-radius: 999px; transition: transform .15s, opacity .15s;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-lime { background: var(--lime); color: var(--navy); }
+  .btn-out { border: 1.5px solid rgba(255,255,255,0.3); color: #fff; }
+
+  footer { background: #232a30; color: rgba(255,255,255,0.55); font-size: 12px; }
+  footer .wrap { padding: 26px 24px; display: flex; flex-wrap: wrap; gap: 14px; justify-content: space-between; align-items: center; }
+  footer b { color: rgba(255,255,255,0.85); font-weight: 600; }
+  footer .disc { max-width: 60ch; line-height: 1.5; }
+  .foot-id { display: flex; align-items: center; gap: 16px; }
+  .foot-logo { height: 34px; display: block; }
+  @media (max-width: 560px) { .foot-id { flex-direction: column; align-items: flex-start; gap: 10px; } }
+
+  /* ---------- tools section ---------- */
+  .tools { background: #fff; border-top: 1px solid var(--line); }
+  .tools .wrap { padding: 56px 24px 48px; }
+  .tools-head { margin-bottom: 26px; }
+  .tools-head h2 {
+    font-family: 'Archivo'; font-weight: 800; font-size: 23px;
+    color: var(--navy); letter-spacing: -0.01em;
+    display: inline-block; padding-bottom: 7px;
+    border-bottom: 3px solid var(--lime);
+  }
+  .tools-head p { color: var(--mute); font-size: 14.5px; margin-top: 10px; }
+
+  /* HomeFundIt promo card */
+  .hfi {
+    display: grid; grid-template-columns: 1.3fr 1fr; gap: 0;
+    border-radius: 16px; overflow: hidden; margin-bottom: 34px;
+    border: 1px solid var(--line);
+  }
+  @media (max-width: 720px) { .hfi { grid-template-columns: 1fr; } }
+  .hfi-left { background: var(--navy); color: #fff; padding: 30px 32px; }
+  .hfi-ey {
+    font-family: 'Archivo'; font-weight: 700; font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--lime);
+    margin-bottom: 12px;
+  }
+  .hfi-left h3 { font-family: 'Archivo'; font-weight: 800; font-size: 22px; line-height: 1.15; margin-bottom: 12px; }
+  .hfi-left p { font-size: 14.5px; color: rgba(255,255,255,0.8); margin-bottom: 10px; }
+  .hfi-right {
+    background: linear-gradient(135deg, var(--teal), #3f8b93);
+    color: #fff; padding: 30px 32px;
+    display: flex; flex-direction: column; justify-content: center; gap: 12px;
+  }
+  .hfi-btn {
+    font-family: 'Archivo'; font-weight: 700; font-size: 14.5px;
+    padding: 13px 20px; border-radius: 10px; text-align: center;
+    transition: transform .15s, background .15s;
+  }
+  .hfi-btn:hover { transform: translateY(-2px); }
+  .hfi-btn.primary { background: var(--lime); color: var(--navy); }
+  .hfi-btn.ghost { background: rgba(255,255,255,0.12); color: #fff; border: 1.5px solid rgba(255,255,255,0.35); }
+  .hfi-note { font-size: 12.5px; color: rgba(255,255,255,0.8); text-align: center; line-height: 1.4; }
+
+  /* calculator wrapper */
+  .calc-head { scroll-margin-top: 80px; }
+  .calc-head h3 {
+    font-family: 'Archivo'; font-weight: 800; font-size: 18px; color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .calc-head p { color: var(--mute); font-size: 13.5px; margin-bottom: 18px; }
+  .calc-shell {
+    background: #fff; border: 1px solid var(--line); border-radius: 16px;
+    padding: 12px; overflow: hidden;
+  }
+
+  /* ---------- nav CTA (Refer a client) ---------- */
+  .nav-cta {
+    background: var(--lime); color: var(--navy) !important;
+    font-weight: 700 !important; padding: 8px 16px; border-radius: 999px;
+    transition: transform .14s, box-shadow .14s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(146,193,58,0.4); }
+
+  /* ---------- footer action buttons ---------- */
+  .foot-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+  .foot-btn {
+    font-family: 'Archivo'; font-weight: 700; font-size: 13px;
+    color: #fff; border: 1.5px solid rgba(255,255,255,0.28);
+    padding: 9px 16px; border-radius: 999px;
+    transition: transform .14s, background .14s, border-color .14s;
+  }
+  .foot-btn:hover { transform: translateY(-1px); border-color: var(--teal); }
+  .foot-btn.lime { background: var(--lime); color: var(--navy); border-color: var(--lime); }
+
+  /* ---------- referral section ---------- */
+  .refer { background: #fff; border-bottom: 1px solid var(--line); }
+  .refer .wrap { padding: 52px 24px 46px; }
+  .refer-head { margin-bottom: 26px; max-width: 70ch; }
+  .refer-head h2 {
+    font-family: 'Archivo'; font-weight: 800; font-size: 25px;
+    color: var(--navy); letter-spacing: -0.01em;
+    display: inline-block; padding-bottom: 7px; border-bottom: 3px solid var(--lime);
+  }
+  .refer-head p { color: var(--mute); font-size: 15px; margin-top: 12px; line-height: 1.55; }
+  .refer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 720px) { .refer-grid { grid-template-columns: 1fr; } }
+  .refer-card {
+    position: relative; background: var(--bg); border: 1px solid var(--line);
+    border-radius: 16px; padding: 26px 26px 24px;
+  }
+  .refer-step {
+    position: absolute; top: -14px; left: 24px;
+    width: 30px; height: 30px; border-radius: 50%;
+    background: var(--navy); color: #fff;
+    font-family: 'Archivo'; font-weight: 800; font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .refer-card h3 { font-family: 'Archivo'; font-weight: 700; font-size: 18px; color: var(--ink); margin: 6px 0 8px; }
+  .refer-card p { font-size: 14px; color: var(--mute); margin-bottom: 18px; line-height: 1.5; }
+  .refer-btn {
+    display: inline-block; font-family: 'Archivo'; font-weight: 700; font-size: 14px;
+    padding: 11px 20px; border-radius: 10px;
+    border: 1.5px solid var(--teal); color: var(--teal);
+    transition: transform .14s, background .14s, color .14s;
+  }
+  .refer-btn:hover { transform: translateY(-2px); background: var(--teal); color: #fff; }
+  .refer-btn.primary { background: var(--lime); border-color: var(--lime); color: var(--navy); }
+  .refer-btn.primary:hover { background: #84b22f; color: var(--navy); }
+  .refer-fine { font-size: 12.5px; color: #98a1a9; margin-top: 18px; font-style: italic; }
+
+  /* ---------- purchase analysis card ---------- */
+  .pa-card {
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    background: linear-gradient(135deg, var(--navy), #384450);
+    border-radius: 16px; padding: 26px 30px; margin-top: 22px; color: #fff;
+  }
+  @media (max-width: 720px) { .pa-card { flex-direction: column; align-items: flex-start; } }
+  .pa-ey {
+    font-family: 'Archivo'; font-weight: 700; font-size: 11px;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--lime); margin-bottom: 10px;
+  }
+  .pa-text h3 { font-family: 'Archivo'; font-weight: 800; font-size: 20px; margin-bottom: 8px; }
+  .pa-text p { font-size: 14px; color: rgba(255,255,255,0.8); max-width: 60ch; line-height: 1.5; }
+  .pa-btn {
+    flex-shrink: 0; font-family: 'Archivo'; font-weight: 700; font-size: 14.5px;
+    background: var(--lime); color: var(--navy);
+    padding: 14px 24px; border-radius: 10px; white-space: nowrap;
+    transition: transform .14s;
+  }
+  .pa-btn:hover { transform: translateY(-2px); }
+
+  /* ---------- resources section ---------- */
+  .resources { background: var(--bg); border-top: 1px solid var(--line); }
+  .resources .wrap { padding: 54px 24px 50px; }
+  .res-head { margin-bottom: 26px; max-width: 72ch; }
+  .res-head h2 {
+    font-family: 'Archivo'; font-weight: 800; font-size: 25px; color: var(--navy);
+    letter-spacing: -0.01em; display: inline-block; padding-bottom: 7px;
+    border-bottom: 3px solid var(--lime);
+  }
+  .res-head p { color: var(--mute); font-size: 15px; margin-top: 12px; line-height: 1.55; }
+  .res-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
+  @media (max-width: 920px) { .res-grid { grid-template-columns: 1fr; } }
+  .res-ey {
+    font-family: 'Archivo'; font-weight: 700; font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--lime); margin-bottom: 8px;
+  }
+  .res-ey.teal { color: var(--teal); }
+
+  /* first payment tool */
+  .res-tool {
+    background: linear-gradient(135deg, var(--navy), #384450); color: #fff;
+    border-radius: 16px; padding: 26px 26px 24px;
+  }
+  .res-tool h3 { font-family: 'Archivo'; font-weight: 800; font-size: 19px; margin-bottom: 8px; }
+  .res-tool .res-sub { font-size: 13px; color: rgba(255,255,255,0.72); line-height: 1.5; margin-bottom: 18px; }
+  .fp-row { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
+  .fp-row label { font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.06em; }
+  .fp-row input, .fp-row select {
+    padding: 12px 14px; border-radius: 10px; border: 1.5px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.08); color: #fff; font-size: 15px; font-family: 'Inter', sans-serif;
+    color-scheme: dark; width: 100%;
+  }
+  .fp-row input:focus, .fp-row select:focus { outline: none; border-color: var(--lime); }
+  .fp-result { background: rgba(146,193,58,0.12); border: 1px solid rgba(146,193,58,0.35); border-radius: 12px; padding: 16px 18px; }
+  .fp-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--lime); }
+  .fp-date { font-family: 'Archivo'; font-weight: 800; font-size: 22px; margin: 4px 0 6px; }
+  .fp-note { font-size: 12px; color: rgba(255,255,255,0.68); line-height: 1.45; }
+
+  /* light tool variant (seller credit) */
+  .res-tool.light { background: #fff; border: 1px solid var(--line); color: var(--ink); }
+  .res-tool.light h3 { color: var(--navy); }
+  .res-tool.light .res-sub { color: var(--mute); }
+  .res-tool.light .fp-row label { color: var(--navy); }
+  .res-tool.light .fp-row input, .res-tool.light .fp-row select {
+    background: var(--bg); border-color: var(--line); color: var(--ink); color-scheme: light;
+  }
+  .res-tool.light .fp-row input:focus, .res-tool.light .fp-row select:focus { border-color: var(--teal); }
+  .fp-result.teal { background: rgba(86,162,170,0.1); border-color: rgba(86,162,170,0.35); }
+  .fp-label.teal { color: var(--teal); }
+  .res-tool.light .fp-date { color: var(--navy); }
+  .res-tool.light .fp-note { color: var(--mute); }
+
+  /* ---------- updates & insights ---------- */
+  .updates { background: #fff; border-bottom: 1px solid var(--line); }
+  .updates .wrap { padding: 52px 24px 46px; }
+  .updates-head { margin-bottom: 24px; max-width: 70ch; }
+  .updates-head h2 {
+    font-family: 'Archivo'; font-weight: 800; font-size: 25px; color: var(--navy);
+    letter-spacing: -0.01em; display: inline-block; padding-bottom: 7px; border-bottom: 3px solid var(--lime);
+  }
+  .updates-head p { color: var(--mute); font-size: 15px; margin-top: 12px; line-height: 1.55; }
+  .updates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  @media (max-width: 720px) { .updates-grid { grid-template-columns: 1fr; } }
+  .updates-empty { color: var(--mute); font-size: 14px; padding: 8px 0; }
+
+  /* extra email buttons */
+  .res-emails { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 18px; align-items: stretch; }
+  @media (max-width: 720px) { .res-emails { grid-template-columns: 1fr; } }
+  .res-email-btn {
+    display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: 14px;
+    padding: 20px 22px; transition: box-shadow .15s, border-color .15s;
+  }
+  .res-email-btn:hover { box-shadow: 0 8px 22px rgba(44,52,60,0.08); border-color: var(--teal); }
+  .ree-ey { display: block; font-family: 'Archivo'; font-weight: 700; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lime); margin-bottom: 7px; }
+  .ree-h { display: block; font-family: 'Archivo'; font-weight: 700; font-size: 16.5px; color: var(--navy); margin-bottom: 6px; }
+  .ree-p { display: block; font-size: 13px; color: var(--mute); line-height: 1.45; }
+  .ree-btn {
+    display: inline-block; align-self: flex-start; margin-top: 16px;
+    font-family: 'Archivo'; font-weight: 700; font-size: 14px;
+    background: var(--lime); color: var(--navy);
+    padding: 11px 20px; border-radius: 10px; white-space: nowrap;
+    transition: transform .14s, box-shadow .14s;
+  }
+  .ree-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(146,193,58,0.4); }
+  .ree-btn:last-child { margin-top: auto; }
+  .ree-docs-label { display: block; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line); font-family: 'Archivo'; font-weight: 700; font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; color: var(--teal); margin-bottom: 5px; }
+  .ree-docs { display: block; font-size: 12.5px; color: var(--ink); line-height: 1.55; }
+</style>
+
+  <style>
+    /* info card (expands inline) */
+    .info-card { cursor: pointer; }
+    .info-tag { color: var(--lime) !important; background: rgba(146,193,58,0.12) !important; }
+    .info-open { opacity: 1 !important; color: var(--teal) !important; }
+    .info-date {
+      display: inline-block; margin-left: 8px; font-family: 'Inter', sans-serif;
+      font-size: 11px; font-weight: 600; color: var(--mute);
+      vertical-align: middle; background: var(--bg); padding: 2px 8px; border-radius: 999px;
+    }
+    .info-body {
+      max-height: 0; overflow: hidden;
+      transition: max-height .28s ease, margin .28s ease, opacity .2s ease;
+      opacity: 0; margin-top: 0;
+    }
+    .info-card.open-info .info-body { max-height: 600px; opacity: 1; margin-top: 14px; margin-bottom: 4px; }
+    .info-hl-label {
+      font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 11px;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); margin-bottom: 8px;
+    }
+    .info-hl { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 9px; }
+    .info-hl li {
+      font-size: 13.5px; color: var(--ink); line-height: 1.5;
+      padding-left: 16px; position: relative;
+    }
+    .info-hl li::before {
+      content: ""; position: absolute; left: 0; top: 8px;
+      width: 6px; height: 6px; border-radius: 50%; background: var(--lime);
+    }
+    .info-note {
+      margin-top: 12px; padding-top: 11px; border-top: 1px dashed var(--line);
+      font-size: 12px; color: var(--mute); font-style: italic; line-height: 1.45;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="brandmark">
+        <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDM2MCAxMTAuOCI+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5jbHMtMSB7CiAgICAgICAgZmlsbDogI2ZmZmZmZjsKICAgICAgfQoKICAgICAgLmNscy0xLCAuY2xzLTIsIC5jbHMtMywgLmNscy00LCAuY2xzLTUgewogICAgICAgIHN0cm9rZS13aWR0aDogMHB4OwogICAgICB9CgogICAgICAuY2xzLTIgewogICAgICAgIGZpbGw6ICM5MmMxM2U7CiAgICAgIH0KCiAgICAgIC5jbHMtMyB7CiAgICAgICAgZmlsbDogIzMzYTRhYzsKICAgICAgfQoKICAgICAgLmNscy00IHsKICAgICAgICBmaWxsOiAjZmZmZmZmOwogICAgICB9CgogICAgICAuY2xzLTUgewogICAgICAgIGZpbGw6ICNmZmZmZmY7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnPgogICAgPGc+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTEwMi43LDUxLjhoNC40YzIsMCwzLjQsMS41LDMuNCwzLjZzLTEuNCwzLjYtMy40LDMuNmgtMS44djMuMmgtMi42di0xMC41Wk0xMDYuNSw1Ni44Yy45LDAsMS4zLS42LDEuMy0xLjRzLS40LTEuNC0xLjMtMS40aC0xLjN2Mi44aDEuM1oiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNMTEyLjEsNTEuOGgyLjZ2MTAuNWgtMi42di0xMC41WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Ik0xMTcuNCw1MS44aDIuNmwyLjksNC45Yy40LjcuOSwxLjguOSwxLjhoMHMtLjEtMS4xLS4xLTEuOHYtNC45aDIuNnYxMC41aC0yLjZsLTIuOS00LjljLS40LS43LS45LTEuOC0uOS0xLjhoMHMuMSwxLjEuMSwxLjh2NC45aC0yLjZ2LTEwLjVaTTEyMC43LDQ4LjhjMSwwLDEuMy45LDEuOC45cy41LS4zLjUtLjhoMS42YzAsMS41LS42LDIuMi0xLjksMi4ycy0xLjMtLjktMS44LS45LS41LjMtLjUuOGgtMS42YzAtMS41LjYtMi4yLDEuOS0yLjJaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTEzNC4xLDYwLjFoLTMuM2wtLjYsMi4yaC0yLjZsMy42LTEwLjVoMi43bDMuNiwxMC41aC0yLjZsLS42LTIuMlpNMTMyLjUsNTQuMnMtLjIsMS4xLS40LDEuOGwtLjYsMmgyLjFsLS42LTJjLS4yLS43LS40LTEuOC0uNC0xLjhoMFoiLz4KICAgIDwvZz4KICAgIDxnPgogICAgICA8Zz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Ik00Mi4yLDUxLjhoMi44bDEuNSw0LjRjLjIuNy41LDEuNy41LDEuN2gwcy4zLTEuMS41LTEuN2wxLjUtNC40aDIuOGwuOSwxMC41aC0yLjZsLS4zLTQuN2MwLS44LDAtMS44LDAtMS44aDBzLS40LDEuMS0uNiwxLjhsLTEuMSwzaC0yLjJsLTEuMS0zYy0uMi0uNy0uNi0xLjgtLjYtMS44aDBzMCwxLDAsMS44bC0uMyw0LjdoLTIuNmwuOS0xMC41WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTU0LjgsNTEuOGgyLjZ2MTAuNWgtMi42di0xMC41WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTY0LjUsNTEuNmMyLjcsMCw0LDEuNCw0LDEuNGwtMS4yLDEuOXMtMS4xLTEtMi42LTFjLTIuMiwwLTMuMSwxLjQtMy4xLDNzMS40LDMuMiwzLDMuMiwyLjEtLjgsMi4xLS44di0uOGgtMS41di0yLjJoMy44djUuOWgtMi4xdi0uM2MwLS4yLDAtLjQsMC0uNGgwcy0xLC45LTIuOC45Yy0yLjcsMC01LjItMi01LjItNS40czIuMy01LjQsNS41LTUuNFoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Ik03MC43LDUxLjhoMi42djYuNmMwLDEuMS43LDEuNywxLjgsMS43czEuOC0uNiwxLjgtMS43di02LjZoMi42djYuNmMwLDIuNC0xLjcsNC00LjQsNHMtNC40LTEuNy00LjQtNHYtNi42WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTgxLjYsNTEuOGg2LjZ2Mi4yaC00djEuOWgzLjJ2Mi4yaC0zLjJ2Mmg0LjJ2Mi4yaC02Ljh2LTEwLjVaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNOTAuMSw1MS44aDIuNnY4LjNoNC4zdjIuMmgtNi45di0xMC41WiIvPgogICAgICA8L2c+CiAgICAgIDxnPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTQyLjIsNTEuOGgyLjhsMS41LDQuNGMuMi43LjUsMS43LjUsMS43aDBzLjMtMS4xLjUtMS43bDEuNS00LjRoMi44bC45LDEwLjVoLTIuNmwtLjMtNC43YzAtLjgsMC0xLjgsMC0xLjhoMHMtLjQsMS4xLS42LDEuOGwtMS4xLDNoLTIuMmwtMS4xLTNjLS4yLS43LS42LTEuOC0uNi0xLjhoMHMwLDEsMCwxLjhsLS4zLDQuN2gtMi42bC45LTEwLjVaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNNTQuOCw1MS44aDIuNnYxMC41aC0yLjZ2LTEwLjVaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNNjQuNSw1MS42YzIuNywwLDQsMS40LDQsMS40bC0xLjIsMS45cy0xLjEtMS0yLjYtMWMtMi4yLDAtMy4xLDEuNC0zLjEsM3MxLjQsMy4yLDMsMy4yLDIuMS0uOCwyLjEtLjh2LS44aC0xLjV2LTIuMmgzLjh2NS45aC0yLjF2LS4zYzAtLjIsMC0uNCwwLS40aDBzLTEsLjktMi44LjljLTIuNywwLTUuMi0yLTUuMi01LjRzMi4zLTUuNCw1LjUtNS40WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTcwLjcsNTEuOGgyLjZ2Ni42YzAsMS4xLjcsMS43LDEuOCwxLjdzMS44LS42LDEuOC0xLjd2LTYuNmgyLjZ2Ni42YzAsMi40LTEuNyw0LTQuNCw0cy00LjQtMS43LTQuNC00di02LjZaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNODEuNiw1MS44aDYuNnYyLjJoLTR2MS45aDMuMnYyLjJoLTMuMnYyaDQuMnYyLjJoLTYuOHYtMTAuNVoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Ik05MC4xLDUxLjhoMi42djguM2g0LjN2Mi4yaC02Ljl2LTEwLjVaIi8+CiAgICAgIDwvZz4KICAgIDwvZz4KICA8L2c+CiAgPHJlY3QgY2xhc3M9ImNscy0zIiB4PSI0MC43IiB5PSI2Ni43IiB3aWR0aD0iOTcuMyIgaGVpZ2h0PSIxLjgiLz4KICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0yMi42LDQyLjlsLTEyLjksOS4ydjE2LjNoNy40YzIsMCwzLjktLjgsNS4yLTIuMmwuNC0uNC43LjdjMS40LDEuMywzLjEsMiw1LDJoN3YtMTYuM2wtMTIuOC05LjJaTTIyLjcsNjMuNmwtMS41LTEuNCwxLjMtMS4zLDEuNCwxLjQtMS4yLDEuM1pNMjUuMyw1OGMuNS41LjksMSwxLjMsMS40bC0xLjUsMS42LTEuNC0xLjQsMS42LTEuNlpNMjIuNiw1OC41bC0xLjctMS44Yy41LS41LDEtMSwxLjYtMS40LjYuNSwxLjIsMS4xLDEuNywxLjZsLTEuNiwxLjZaTTIxLjQsNTkuNmwtMS4zLDEuNC0xLjctMS43Yy40LS40LjgtLjksMS4zLTEuNWwxLjcsMS44Wk0zMy45LDY2LjloLTUuNWMtMS41LDAtMi45LS42LTMuOS0xLjZsLS43LS43LDEuMi0xLjMsMSwxLC45LTEuMy0uOC0uOCwxLjQtMS42di0yLjFjLS4yLS4yLS42LS43LTEuMy0xLjRsMS4xLTEuMi0uOS0xLjQtMS4zLDEuNGMtLjUtLjUtMS0xLTEuNi0xLjUuMSwwLC4yLS4yLjMtLjJoMHMwLDAsMCwwYzEuNS0xLjEsMy0xLjksNC4xLTEuOSwwLDAsMCwwLDAsMHYtMS41Yy0xLjEsMC0yLjQuNi0zLjcsMS40LjgtMS43LDIuNi0yLjMsMi42LTIuM2wtLjItLjctLjItLjdjLS45LjMtMi4yLDEtMy4xLDIuNHYtMy40aC0xLjV2My4zYy0uOS0xLjMtMi4yLTItMy0yLjNsLS41LDEuNHMyLC43LDIuOCwyLjZjLTEuNS0xLTMtMS43LTQuMi0xLjd2MS41czAsMCwwLDBjMS4yLS4xLDIuOC44LDQuNCwyLjEtLjUuNS0xLC45LTEuNSwxLjNsLTEuMi0xLjMtLjksMS40LDEsMS4xYy0uNy44LTEuMiwxLjMtMS40LDEuNXYyLjFsMS43LDEuNi0uOS45LjksMS4zLDEuMS0xLjEsMS41LDEuNS0uNC40Yy0xLjEsMS4xLTIuNiwxLjgtNC4xLDEuOGgtNS45di0xNGwxMS40LTguMSwxMS4zLDguMXYxNFoiLz4KICA8Zz4KICAgIDxnPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0xOTkuNCw0OS41bC0xLjcsMS4zYy0xLTEuMi0yLjEtMi4yLTMuNC0yLjgtMS4zLS42LTIuOC0xLTQuNC0xcy0zLjQuNC00LjksMS4zLTIuNywyLTMuNSwzLjRjLS44LDEuNC0xLjIsMy0xLjIsNC44LDAsMi43LjksNC45LDIuOCw2LjcsMS44LDEuOCw0LjIsMi43LDcsMi43czUuNy0xLjIsNy43LTMuNmwxLjcsMS4zYy0xLjEsMS40LTIuNSwyLjUtNC4xLDMuMi0xLjYuOC0zLjUsMS4xLTUuNSwxLjEtMy44LDAtNi45LTEuMy05LjEtMy44LTEuOS0yLjItMi44LTQuOC0yLjgtNy44czEuMS01LjksMy40LTguMWMyLjMtMi4yLDUuMS0zLjMsOC41LTMuM3MzLjkuNCw1LjYsMS4yYzEuNy44LDMsMiw0LjEsMy40Ii8+CiAgICAgIDxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIyMDAuMyA2Ny45IDIwMy41IDQ2IDIwMy44IDQ2IDIxMi44IDY0IDIyMS42IDQ2IDIyMiA0NiAyMjUuMSA2Ny45IDIyMyA2Ny45IDIyMC44IDUyLjIgMjEzLjEgNjcuOSAyMTIuNSA2Ny45IDIwNC42IDUyLjEgMjAyLjUgNjcuOSAyMDAuMyA2Ny45Ii8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTI0OC4zLDQ5LjFsLTEuNywxLjZjLTEuMi0xLjItMi42LTIuMS00LTIuNy0xLjUtLjYtMi45LS45LTQuMy0uOXMtMy40LjQtNC45LDEuM2MtMS42LjgtMi44LDItMy42LDMuNC0uOSwxLjQtMS4zLDMtMS4zLDQuNnMuNCwzLjIsMS4zLDQuN2MuOSwxLjUsMi4xLDIuNywzLjcsMy41LDEuNi45LDMuMywxLjMsNS4xLDEuM3M0LjItLjYsNS43LTEuOWMxLjYtMS4zLDIuNS0yLjksMi44LTVoLTd2LTIuMWg5LjVjMCwzLjQtMSw2LjEtMyw4LjEtMiwyLTQuNywzLTgsM3MtNy4zLTEuNC05LjctNC4yYy0xLjgtMi4xLTIuNy00LjYtMi43LTcuNHMuNS00LDEuNi01LjhjMS0xLjgsMi41LTMuMiw0LjMtNC4yLDEuOC0xLDMuOS0xLjUsNi4yLTEuNXMzLjYuMyw1LjMsMWMxLjYuNywzLjIsMS44LDQuOCwzLjIiLz4KICAgIDwvZz4KICAgIDxnPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0yNTIuNyw1Ni44aDEuMXY0LjZoNS42di00LjZoMS4xdjExLjFoLTEuMXYtNS40aC01LjZ2NS40aC0xLjF2LTExLjFaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTI3NC40LDYyLjRjMCwzLjMtMi41LDUuOC01LjgsNS44cy01LjgtMi43LTUuOC01LjgsMi42LTUuOSw1LjgtNS45LDUuOSwyLjUsNS45LDUuOFpNMjYzLjksNjIuNGMwLDIuNywyLjIsNC43LDQuNyw0LjdzNC43LTIsNC43LTQuOC0yLjMtNC43LTQuNy00LjctNC43LDEuOS00LjcsNC44WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0yNzYuMSw2Ny45bDEuNi0xMS4xaC4ybDQuNSw5LjEsNC41LTkuMWguMmwxLjYsMTEuMWgtMS4xbC0xLjEtNy45LTMuOSw3LjloLS4zbC00LTgtMS4xLDhoLTEuMVoiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy00IiBkPSJNMjkwLjgsNTYuOGg2LjN2MS4xaC01LjJ2My41aDUuMnYxLjFoLTUuMnY0LjRoNS4ydjEuMWgtNi4zdi0xMS4xWiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0zMDMuMyw1Ni44aDEuMXYxMGg0LjN2MS4xaC01LjR2LTExLjFaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTMyMC43LDYyLjRjMCwzLjMtMi41LDUuOC01LjgsNS44cy01LjgtMi43LTUuOC01LjgsMi42LTUuOSw1LjgtNS45LDUuOSwyLjUsNS45LDUuOFpNMzEwLjIsNjIuNGMwLDIuNywyLjIsNC43LDQuNyw0LjdzNC43LTIsNC43LTQuOC0yLjMtNC43LTQuNy00LjctNC43LDEuOS00LjcsNC44WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0zMjYuNSw1Ni44bDUuMiwxMS4xaC0xLjJsLTEuNy0zLjZoLTQuOGwtMS43LDMuNmgtMS4ybDUuMi0xMS4xaC4zWk0zMjYuNCw1OS4ybC0xLjksNGgzLjhsLTEuOS00WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0zMzMuNCw2Ny45di0xMS4xaC4ybDcuMyw4LjV2LTguNWgxLjF2MTEuMWgtLjJsLTcuMy04LjR2OC40aC0xLjFaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTM0OS41LDU5LjFjLS42LS44LTEuMS0xLjQtMi0xLjRzLTEuNS43LTEuNSwxLjQuNCwxLjIsMSwxLjdjMi4xLDEuNSwzLjYsMi42LDMuNiw0LjRzLTEuMywzLTMuMSwzLTIuNS0uOC0zLjMtMi4zbC45LS42Yy43LDEuMiwxLjUsMS44LDIuMywxLjhzMi4xLS44LDIuMS0xLjktMS4xLTEuOS0zLjctNGMtLjUtLjQtLjktMS4zLS45LTIuMSwwLTEuNSwxLjItMi42LDIuNy0yLjZzMi4yLjgsMi45LDEuOGwtLjkuN1oiLz4KICAgIDwvZz4KICA8L2c+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIxNTgiIHk9IjM4IiB3aWR0aD0iLjkiIGhlaWdodD0iMzQuMyIvPgo8L3N2Zz4=" alt="Miguel Pi&ntilde;a | CMG Home Loans">
+      </div>
+      <nav class="topnav"><a href="#quick-reference">Quick Reference</a><a href="#buyer-programs">Buyer Programs</a><a href="#investor-specialty">Investor & Specialty</a><a href="#market-education">Market & Education</a><a href="#updates-insights">Updates</a><a href="#resources">Resources</a><a href="#tools">Tools</a><a href="#mortgage-calc">Mortgage Calc</a><a class="nav-cta" href="#refer">Refer a client</a></nav>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Partner toolkit <span class="sep">&middot;</span> <span class="ptr">for my real estate partners</span></div>
+      <h1>The lending toolkit, <span class="g">built for your deals.</span></h1>
+      <p class="lede">Every CMG program your buyers and sellers might need &mdash; organized so you can find the right answer fast, send a flyer to a client, or settle a financing question on the spot.</p>
+      <div class="meta">
+        <span><b>Bilingual</b> &middot; English / Espa&ntilde;ol</span>
+        <span><b>11 years</b> in mortgage lending</span>
+        <span><b>(512) 954-1394</b> &middot; mpina@cmghomeloans.com</span>
+      </div>
+    </div>
+  </header>
+
+
+  <section class="refer" id="refer">
+    <div class="wrap">
+      <div class="refer-head">
+        <h2>Refer a client</h2>
+        <p>Two quick emails, ready to send. One hands the client off to me with everything I need; the other is a warm intro you can forward to your buyer. Both open pre-filled &mdash; just fill in the blanks.</p>
+      </div>
+      <div class="refer-grid">
+        <div class="refer-card">
+          <div class="refer-step">1</div>
+          <h3>Send me the referral</h3>
+          <p>Emails me your client's details so I can reach out and get them moving.</p>
+          <a class="refer-btn primary" href="mailto:mpina@cmghomeloans.com?subject=Client%20referral&body=Hi%20Miguel%2C%0A%0AI%27d%20like%20to%20refer%20a%20client%20to%20you.%20Here%27s%20their%20info%3A%0A%0ACLIENT%0A-%20Name%28s%29%3A%0A-%20Phone%3A%0A-%20Email%3A%0A-%20Best%20way/time%20to%20reach%20them%3A%0A%0AWHAT%20THEY%20NEED%0A-%20Buying%20/%20refinancing%3A%0A-%20Price%20range%20or%20area%3A%0A-%20Property%20address%20%28if%20they%27ve%20already%20found%20the%20home%29%3A%0A-%20Timeline%3A%0A-%20Already%20pre-approved%20elsewhere%3F%20%28yes/no%29%3A%0A%0AANYTHING%20YOU%20SHOULD%20KNOW%0A%0A">Email the referral to me &rarr;</a>
+        </div>
+        <div class="refer-card">
+          <div class="refer-step">2</div>
+          <h3>Introduce me to your client</h3>
+          <p>Opens a friendly intro email addressed to your buyer &mdash; you stay in control of the relationship.</p>
+          <a class="refer-btn" href="mailto:?subject=Quick%20intro%20to%20my%20lender%2C%20Miguel%20Pina&body=Hi%20%5BClient%20first%20name%5D%2C%0A%0AI%20wanted%20to%20personally%20introduce%20you%20to%20my%20lender%2C%20Miguel%20Pina%20with%20CMG%20Home%20Loans.%20He%27s%20helped%20a%20lot%20of%20my%20clients%2C%20and%20getting%20pre-approved%20early%20makes%20a%20real%20difference%20in%20this%20market.%0A%0AThe%20easiest%20first%20step%20is%20a%20quick%20home%20loan%20discovery%20call%20with%20him%3A%0Ahttps%3A//calendly.com/miguelpinatx/home-loan-discovery-call%0A%0AMiguel%20Pina%20%7C%20CMG%20Home%20Loans%0A%28512%29%20954-1394%20%7C%20mpina%40cmghomeloans.com%0Awww.miguelpina.com%20%7C%20NMLS%23%201570598%0A%0AYou%27re%20free%20to%20choose%20any%20lender%2C%20but%20I%27d%20really%20recommend%20starting%20here.%20Let%20me%20know%20if%20you%27d%20like%20me%20to%20connect%20you%20directly.%0A">Open the client intro &rarr;</a>
+        </div>
+      </div>
+      <p class="refer-fine">Your client is always free to choose any lender. These intros are informational and create no obligation.</p>
+
+      <div class="pa-card">
+        <div class="pa-text">
+          <div class="pa-ey">Purchase analysis &middot; For your client</div>
+          <h3>Request a side-by-side payment comparison</h3>
+          <p>I'll build a clean breakdown for your buyer &mdash; down-payment options, loan types, and monthly payments compared side by side, so they can see their choices clearly. Just send me the details and I'll turn it around fast.</p>
+        </div>
+        <a class="pa-btn" href="mailto:mpina@cmghomeloans.com?subject=Purchase%20analysis%20request&body=Hi%20Miguel%2C%0A%0ACan%20you%20put%20together%20a%20purchase%20analysis%20/%20payment%20comparison%20for%20my%20client%3F%20Details%20below%3A%0A%0ACLIENT%0A-%20Name%28s%29%3A%0A-%20Best%20phone%3A%0A-%20Best%20email%3A%0A-%20OK%20for%20you%20to%20contact%20them%20directly%3F%20%28yes/no%29%3A%0A%0APROPERTY%20%26%20PRICE%0A-%20Purchase%20price%3A%0A-%20Property%20address%20or%20area%3A%0A-%20Property%20type%3A%0A-%20Estimated%20taxes%20%28if%20known%29%3A%0A-%20HOA%20dues%20%28if%20any%29%3A%0A%0AWHAT%20TO%20COMPARE%0A-%20Down%20payment%20option%28s%29%20to%20show%20%28e.g.%203%25%2C%205%25%2C%2010%25%2C%2020%25%29%3A%0A-%20Loan%20types%20to%20compare%20%28Conventional%20/%20FHA%20/%20VA%20/%20other%29%3A%0A-%20Anything%20specific%20they%27re%20weighing%20%28buydown%2C%20lower%20payment%20vs.%20less%20cash%2C%20etc.%29%3A%0A%0A">Request an analysis &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="resources" id="resources">
+    <div class="wrap">
+      <div class="res-head">
+        <h2>Resources &amp; quick tools</h2>
+        <p>Plug-and-play tools to keep on hand &mdash; plus two pre-filled emails for common asks.</p>
+      </div>
+
+      <div class="res-grid">
+        <!-- First payment date tool -->
+        <div class="res-tool">
+          <div class="res-ey">First payment date finder</div>
+          <h3>When is the first payment due?</h3>
+          <p class="res-sub">Enter the closing date. First payments are due the 1st of the second month after closing.</p>
+          <div class="fp-row">
+            <label for="fp-close">Closing date</label>
+            <input type="date" id="fp-close">
+          </div>
+          <div class="fp-result" id="fp-result" aria-live="polite">
+            <div class="fp-label">First payment due</div>
+            <div class="fp-date" id="fp-date">&mdash;</div>
+            <div class="fp-note" id="fp-note">Pick a closing date above.</div>
+          </div>
+        </div>
+
+        <!-- CD timing tool -->
+        <div class="res-tool">
+          <div class="res-ey">Closing Disclosure timing</div>
+          <h3>Latest CD date to hit your close</h3>
+          <p class="res-sub">The buyer must receive the CD at least 3 business days before closing. Enter the target close date.</p>
+          <div class="fp-row">
+            <label for="cd-close">Target closing date</label>
+            <input type="date" id="cd-close">
+          </div>
+          <div class="fp-result" id="cd-result" aria-live="polite">
+            <div class="fp-label">CD must be received by</div>
+            <div class="fp-date" id="cd-date">&mdash;</div>
+            <div class="fp-note" id="cd-note">Pick a closing date above.</div>
+          </div>
+        </div>
+
+        <!-- Max seller credit tool -->
+        <div class="res-tool light">
+          <div class="res-ey teal">Max seller credit</div>
+          <h3>How much can the seller contribute?</h3>
+          <p class="res-sub">Interested-party contribution caps by loan type. Conventional depends on down payment and occupancy.</p>
+          <div class="fp-row">
+            <label for="sc-loan">Loan type</label>
+            <select id="sc-loan">
+              <option value="conv">Conventional</option>
+              <option value="fha">FHA</option>
+              <option value="va">VA</option>
+              <option value="usda">USDA</option>
+            </select>
+          </div>
+          <div class="fp-row" id="sc-conv-occ">
+            <label for="sc-occ">Occupancy</label>
+            <select id="sc-occ">
+              <option value="primary">Primary / second home</option>
+              <option value="investment">Investment property</option>
+            </select>
+          </div>
+          <div class="fp-row" id="sc-conv-dp">
+            <label for="sc-dp">Down payment</label>
+            <select id="sc-dp">
+              <option value="low">Less than 10% down</option>
+              <option value="mid">10% &ndash; 24.99% down</option>
+              <option value="high">25% or more down</option>
+            </select>
+          </div>
+          <div class="fp-result teal" id="sc-result" aria-live="polite">
+            <div class="fp-label teal">Max seller credit</div>
+            <div class="fp-date" id="sc-pct">&mdash;</div>
+            <div class="fp-note" id="sc-note">Choose a loan type above.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Two more pre-filled emails -->
+      <div class="res-emails">
+        <div class="res-email-btn">
+          <span class="ree-ey">&#9993; Email template &middot; sends to me</span>
+          <span class="ree-h">Can you check if this condo is warrantable?</span>
+          <span class="ree-p">Opens a pre-filled email to me with the details I need to confirm a condo project will pass agency review.</span>
+          <span class="ree-docs-label">Docs I may need (Fannie/Freddie):</span>
+          <span class="ree-docs">Condo questionnaire &middot; HOA budget &amp; reserves &middot; Master insurance &middot; CC&amp;Rs / bylaws &middot; Recent HOA meeting minutes</span>
+          <a class="ree-btn" href="mailto:mpina@cmghomeloans.com?subject=Is%20this%20condo%20warrantable%3F&body=Hi%20Miguel%2C%0A%0ABefore%20I%20write%20an%20offer%2C%20can%20you%20check%20if%20this%20condo%20project%20is%20warrantable%20/%20will%20work%20for%20financing%3F%20Details%20below%3A%0A%0APROPERTY%0A-%20Project%20/%20condo%20name%3A%0A-%20Unit%20address%3A%0A-%20Listing%20link%20%28if%20any%29%3A%0A%0AWHAT%20THE%20CLIENT%20IS%20PLANNING%0A-%20Loan%20type%20they%27d%20likely%20use%20%28Conventional%20/%20FHA%20/%20VA%29%3A%0A-%20Estimated%20down%20payment%3A%0A-%20Primary%20residence%2C%20second%20home%2C%20or%20investment%3A%0A%0AANYTHING%20I%20ALREADY%20KNOW%20ABOUT%20THE%20HOA%0A-%20HOA%20dues%3A%0A-%20Any%20known%20issues%20%28litigation%2C%20low%20reserves%2C%20high%20investor%20%25%2C%20etc.%29%3A%0A%0ADOCS%20YOU%20MAY%20NEED%20TO%20REVIEW%20%28per%20Fannie/Freddie%29%3A%0A-%20Condo%20questionnaire%20%28you%20provide%20the%20form%20to%20the%20HOA/management%29%0A-%20HOA%20budget%20%2B%20reserve%20study%0A-%20Master/blanket%20insurance%20policy%20%28and%20flood%2C%20if%20applicable%29%0A-%20Recorded%20CC%26Rs%20/%20bylaws%20/%20declaration%0A-%20Recent%20HOA%20meeting%20minutes%20%28litigation%2C%20special%20assessments%29%0A%0AI%27ll%20get%20whatever%20I%20can%20from%20the%20listing%20agent%20or%20HOA%20management.%20Just%20let%20me%20know%20which%20ones%20you%20need%20first.%0A">&#9993;&nbsp; Email me this condo &rarr;</a>
+        </div>
+        <div class="res-email-btn">
+          <span class="ree-ey">&#9993; Email template &middot; sends to me</span>
+          <span class="ree-h">Request an updated pre-approval letter</span>
+          <span class="ree-p">Opens a pre-filled email to me &mdash; just fill in the new price or property and I'll turn around a fresh letter.</span>
+          <a class="ree-btn" href="mailto:mpina@cmghomeloans.com?subject=Updated%20pre-approval%20letter%20request&body=Hi%20Miguel%2C%0A%0AMy%20client%20needs%20an%20updated%20pre-approval%20letter.%20Details%20below%3A%0A%0ACLIENT%0A-%20Name%28s%29%3A%0A-%20Best%20phone%20/%20email%3A%0A%0AUPDATE%20NEEDED%0A-%20New%20purchase%20price%20/%20offer%20amount%3A%0A-%20Property%20address%20%28if%20making%20an%20offer%20on%20a%20specific%20home%29%3A%0A-%20Loan%20amount%20or%20down%20payment%20to%20reflect%3A%0A-%20Needed%20by%20%28date/time%29%3A%0A%0AThanks%21%0A">&#9993;&nbsp; Request a letter &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="updates" id="updates-insights">
+    <div class="wrap">
+      <div class="updates-head">
+        <h2>Updates &amp; Insights</h2>
+        <p>Quick reads on rate moves, guideline changes, and financing strategies worth knowing &mdash; tap any to expand.</p>
+      </div>
+      <div class="updates-grid" id="updates-grid"></div>
+    </div>
+  </section>
+
+  <main class="wrap" id="flyer-sections"></main>
+
+
+  <section class="tools" id="tools">
+    <div class="wrap">
+      <div class="tools-head">
+        <h2>Tools for you &amp; your clients</h2>
+        <p>Two things worth bookmarking &mdash; a down-payment gifting platform you can offer buyers, and a live payment calculator you can run on the spot.</p>
+      </div>
+
+      <div class="hfi">
+        <div class="hfi-left">
+          <div class="hfi-ey">HomeFundIt&trade; &middot; Down-payment gifting</div>
+          <h3>Help buyers crowdfund their down payment</h3>
+          <p>HomeFundIt lets buyers raise down-payment gifts from family and friends &mdash; and can add matching funds toward closing costs. A real edge for first-time buyers who have the income but not the savings yet.</p>
+          <p>As my partner, you get your own realtor portal to refer buyers directly.</p>
+        </div>
+        <div class="hfi-right">
+          <a class="hfi-btn primary" href="https://realtor.homefundit.com/los/MiguelPinaJr" target="_blank" rel="noopener">Open the realtor portal &rarr;</a>
+          <a class="hfi-btn ghost" href="https://www.homefundit.com" target="_blank" rel="noopener">Learn how HomeFundIt works</a>
+          <div class="hfi-note">Refers buyers to me, Miguel Pi&ntilde;a, at CMG Home Loans.</div>
+        </div>
+      </div>
+
+      <div class="calc-head" id="mortgage-calc">
+        <h3>Mortgage payment calculator</h3>
+        <p>Estimate principal, interest, taxes, and insurance &mdash; then apply or reach out right from the tool.</p>
+      </div>
+      <div class="calc-shell">
+        <section id="calculator" class="calculator-section"></section>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-id">
+        <img class="foot-logo" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDM2MCAxMTAuOCI+CiAgPGRlZnM+CiAgICA8c3R5bGU+CiAgICAgIC5jbHMtMSB7CiAgICAgICAgZmlsbDogI2ZmZmZmZjsKICAgICAgfQoKICAgICAgLmNscy0xLCAuY2xzLTIsIC5jbHMtMywgLmNscy00LCAuY2xzLTUgewogICAgICAgIHN0cm9rZS13aWR0aDogMHB4OwogICAgICB9CgogICAgICAuY2xzLTIgewogICAgICAgIGZpbGw6ICM5MmMxM2U7CiAgICAgIH0KCiAgICAgIC5jbHMtMyB7CiAgICAgICAgZmlsbDogIzMzYTRhYzsKICAgICAgfQoKICAgICAgLmNscy00IHsKICAgICAgICBmaWxsOiAjZmZmZmZmOwogICAgICB9CgogICAgICAuY2xzLTUgewogICAgICAgIGZpbGw6ICNmZmZmZmY7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnPgogICAgPGc+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTEwMi43LDUxLjhoNC40YzIsMCwzLjQsMS41LDMuNCwzLjZzLTEuNCwzLjYtMy40LDMuNmgtMS44djMuMmgtMi42di0xMC41Wk0xMDYuNSw1Ni44Yy45LDAsMS4zLS42LDEuMy0xLjRzLS40LTEuNC0xLjMtMS40aC0xLjN2Mi44aDEuM1oiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNMTEyLjEsNTEuOGgyLjZ2MTAuNWgtMi42di0xMC41WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Ik0xMTcuNCw1MS44aDIuNmwyLjksNC45Yy40LjcuOSwxLjguOSwxLjhoMHMtLjEtMS4xLS4xLTEuOHYtNC45aDIuNnYxMC41aC0yLjZsLTIuOS00LjljLS40LS43LS45LTEuOC0uOS0xLjhoMHMuMSwxLjEuMSwxLjh2NC45aC0yLjZ2LTEwLjVaTTEyMC43LDQ4LjhjMSwwLDEuMy45LDEuOC45cy41LS4zLjUtLjhoMS42YzAsMS41LS42LDIuMi0xLjksMi4ycy0xLjMtLjktMS44LS45LS41LjMtLjUuOGgtMS42YzAtMS41LjYtMi4yLDEuOS0yLjJaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTEzNC4xLDYwLjFoLTMuM2wtLjYsMi4yaC0yLjZsMy42LTEwLjVoMi43bDMuNiwxMC41aC0yLjZsLS42LTIuMlpNMTMyLjUsNTQuMnMtLjIsMS4xLS40LDEuOGwtLjYsMmgyLjFsLS42LTJjLS4yLS43LS40LTEuOC0uNC0xLjhoMFoiLz4KICAgIDwvZz4KICAgIDxnPgogICAgICA8Zz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Ik00Mi4yLDUxLjhoMi44bDEuNSw0LjRjLjIuNy41LDEuNy41LDEuN2gwcy4zLTEuMS41LTEuN2wxLjUtNC40aDIuOGwuOSwxMC41aC0yLjZsLS4zLTQuN2MwLS44LDAtMS44LDAtMS44aDBzLS40LDEuMS0uNiwxLjhsLTEuMSwzaC0yLjJsLTEuMS0zYy0uMi0uNy0uNi0xLjgtLjYtMS44aDBzMCwxLDAsMS44bC0uMyw0LjdoLTIuNmwuOS0xMC41WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTU0LjgsNTEuOGgyLjZ2MTAuNWgtMi42di0xMC41WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTY0LjUsNTEuNmMyLjcsMCw0LDEuNCw0LDEuNGwtMS4yLDEuOXMtMS4xLTEtMi42LTFjLTIuMiwwLTMuMSwxLjQtMy4xLDNzMS40LDMuMiwzLDMuMiwyLjEtLjgsMi4xLS44di0uOGgtMS41di0yLjJoMy44djUuOWgtMi4xdi0uM2MwLS4yLDAtLjQsMC0uNGgwcy0xLC45LTIuOC45Yy0yLjcsMC01LjItMi01LjItNS40czIuMy01LjQsNS41LTUuNFoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Ik03MC43LDUxLjhoMi42djYuNmMwLDEuMS43LDEuNywxLjgsMS43czEuOC0uNiwxLjgtMS43di02LjZoMi42djYuNmMwLDIuNC0xLjcsNC00LjQsNHMtNC40LTEuNy00LjQtNHYtNi42WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTgxLjYsNTEuOGg2LjZ2Mi4yaC00djEuOWgzLjJ2Mi4yaC0zLjJ2Mmg0LjJ2Mi4yaC02Ljh2LTEwLjVaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNOTAuMSw1MS44aDIuNnY4LjNoNC4zdjIuMmgtNi45di0xMC41WiIvPgogICAgICA8L2c+CiAgICAgIDxnPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTQyLjIsNTEuOGgyLjhsMS41LDQuNGMuMi43LjUsMS43LjUsMS43aDBzLjMtMS4xLjUtMS43bDEuNS00LjRoMi44bC45LDEwLjVoLTIuNmwtLjMtNC43YzAtLjgsMC0xLjgsMC0xLjhoMHMtLjQsMS4xLS42LDEuOGwtMS4xLDNoLTIuMmwtMS4xLTNjLS4yLS43LS42LTEuOC0uNi0xLjhoMHMwLDEsMCwxLjhsLS4zLDQuN2gtMi42bC45LTEwLjVaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNNTQuOCw1MS44aDIuNnYxMC41aC0yLjZ2LTEwLjVaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNNjQuNSw1MS42YzIuNywwLDQsMS40LDQsMS40bC0xLjIsMS45cy0xLjEtMS0yLjYtMWMtMi4yLDAtMy4xLDEuNC0zLjEsM3MxLjQsMy4yLDMsMy4yLDIuMS0uOCwyLjEtLjh2LS44aC0xLjV2LTIuMmgzLjh2NS45aC0yLjF2LS4zYzAtLjIsMC0uNCwwLS40aDBzLTEsLjktMi44LjljLTIuNywwLTUuMi0yLTUuMi01LjRzMi4zLTUuNCw1LjUtNS40WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNSIgZD0iTTcwLjcsNTEuOGgyLjZ2Ni42YzAsMS4xLjcsMS43LDEuOCwxLjdzMS44LS42LDEuOC0xLjd2LTYuNmgyLjZ2Ni42YzAsMi40LTEuNyw0LTQuNCw0cy00LjQtMS43LTQuNC00di02LjZaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy01IiBkPSJNODEuNiw1MS44aDYuNnYyLjJoLTR2MS45aDMuMnYyLjJoLTMuMnYyaDQuMnYyLjJoLTYuOHYtMTAuNVoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTUiIGQ9Ik05MC4xLDUxLjhoMi42djguM2g0LjN2Mi4yaC02Ljl2LTEwLjVaIi8+CiAgICAgIDwvZz4KICAgIDwvZz4KICA8L2c+CiAgPHJlY3QgY2xhc3M9ImNscy0zIiB4PSI0MC43IiB5PSI2Ni43IiB3aWR0aD0iOTcuMyIgaGVpZ2h0PSIxLjgiLz4KICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0yMi42LDQyLjlsLTEyLjksOS4ydjE2LjNoNy40YzIsMCwzLjktLjgsNS4yLTIuMmwuNC0uNC43LjdjMS40LDEuMywzLjEsMiw1LDJoN3YtMTYuM2wtMTIuOC05LjJaTTIyLjcsNjMuNmwtMS41LTEuNCwxLjMtMS4zLDEuNCwxLjQtMS4yLDEuM1pNMjUuMyw1OGMuNS41LjksMSwxLjMsMS40bC0xLjUsMS42LTEuNC0xLjQsMS42LTEuNlpNMjIuNiw1OC41bC0xLjctMS44Yy41LS41LDEtMSwxLjYtMS40LjYuNSwxLjIsMS4xLDEuNywxLjZsLTEuNiwxLjZaTTIxLjQsNTkuNmwtMS4zLDEuNC0xLjctMS43Yy40LS40LjgtLjksMS4zLTEuNWwxLjcsMS44Wk0zMy45LDY2LjloLTUuNWMtMS41LDAtMi45LS42LTMuOS0xLjZsLS43LS43LDEuMi0xLjMsMSwxLC45LTEuMy0uOC0uOCwxLjQtMS42di0yLjFjLS4yLS4yLS42LS43LTEuMy0xLjRsMS4xLTEuMi0uOS0xLjQtMS4zLDEuNGMtLjUtLjUtMS0xLTEuNi0xLjUuMSwwLC4yLS4yLjMtLjJoMHMwLDAsMCwwYzEuNS0xLjEsMy0xLjksNC4xLTEuOSwwLDAsMCwwLDAsMHYtMS41Yy0xLjEsMC0yLjQuNi0zLjcsMS40LjgtMS43LDIuNi0yLjMsMi42LTIuM2wtLjItLjctLjItLjdjLS45LjMtMi4yLDEtMy4xLDIuNHYtMy40aC0xLjV2My4zYy0uOS0xLjMtMi4yLTItMy0yLjNsLS41LDEuNHMyLC43LDIuOCwyLjZjLTEuNS0xLTMtMS43LTQuMi0xLjd2MS41czAsMCwwLDBjMS4yLS4xLDIuOC44LDQuNCwyLjEtLjUuNS0xLC45LTEuNSwxLjNsLTEuMi0xLjMtLjksMS40LDEsMS4xYy0uNy44LTEuMiwxLjMtMS40LDEuNXYyLjFsMS43LDEuNi0uOS45LjksMS4zLDEuMS0xLjEsMS41LDEuNS0uNC40Yy0xLjEsMS4xLTIuNiwxLjgtNC4xLDEuOGgtNS45di0xNGwxMS40LTguMSwxMS4zLDguMXYxNFoiLz4KICA8Zz4KICAgIDxnPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0xOTkuNCw0OS41bC0xLjcsMS4zYy0xLTEuMi0yLjEtMi4yLTMuNC0yLjgtMS4zLS42LTIuOC0xLTQuNC0xcy0zLjQuNC00LjksMS4zLTIuNywyLTMuNSwzLjRjLS44LDEuNC0xLjIsMy0xLjIsNC44LDAsMi43LjksNC45LDIuOCw2LjcsMS44LDEuOCw0LjIsMi43LDcsMi43czUuNy0xLjIsNy43LTMuNmwxLjcsMS4zYy0xLjEsMS40LTIuNSwyLjUtNC4xLDMuMi0xLjYuOC0zLjUsMS4xLTUuNSwxLjEtMy44LDAtNi45LTEuMy05LjEtMy44LTEuOS0yLjItMi44LTQuOC0yLjgtNy44czEuMS01LjksMy40LTguMWMyLjMtMi4yLDUuMS0zLjMsOC41LTMuM3MzLjkuNCw1LjYsMS4yYzEuNy44LDMsMiw0LjEsMy40Ii8+CiAgICAgIDxwb2x5Z29uIGNsYXNzPSJjbHMtMiIgcG9pbnRzPSIyMDAuMyA2Ny45IDIwMy41IDQ2IDIwMy44IDQ2IDIxMi44IDY0IDIyMS42IDQ2IDIyMiA0NiAyMjUuMSA2Ny45IDIyMyA2Ny45IDIyMC44IDUyLjIgMjEzLjEgNjcuOSAyMTIuNSA2Ny45IDIwNC42IDUyLjEgMjAyLjUgNjcuOSAyMDAuMyA2Ny45Ii8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMiIgZD0iTTI0OC4zLDQ5LjFsLTEuNywxLjZjLTEuMi0xLjItMi42LTIuMS00LTIuNy0xLjUtLjYtMi45LS45LTQuMy0uOXMtMy40LjQtNC45LDEuM2MtMS42LjgtMi44LDItMy42LDMuNC0uOSwxLjQtMS4zLDMtMS4zLDQuNnMuNCwzLjIsMS4zLDQuN2MuOSwxLjUsMi4xLDIuNywzLjcsMy41LDEuNi45LDMuMywxLjMsNS4xLDEuM3M0LjItLjYsNS43LTEuOWMxLjYtMS4zLDIuNS0yLjksMi44LTVoLTd2LTIuMWg5LjVjMCwzLjQtMSw2LjEtMyw4LjEtMiwyLTQuNywzLTgsM3MtNy4zLTEuNC05LjctNC4yYy0xLjgtMi4xLTIuNy00LjYtMi43LTcuNHMuNS00LDEuNi01LjhjMS0xLjgsMi41LTMuMiw0LjMtNC4yLDEuOC0xLDMuOS0xLjUsNi4yLTEuNXMzLjYuMyw1LjMsMWMxLjYuNywzLjIsMS44LDQuOCwzLjIiLz4KICAgIDwvZz4KICAgIDxnPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0yNTIuNyw1Ni44aDEuMXY0LjZoNS42di00LjZoMS4xdjExLjFoLTEuMXYtNS40aC01LjZ2NS40aC0xLjF2LTExLjFaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTI3NC40LDYyLjRjMCwzLjMtMi41LDUuOC01LjgsNS44cy01LjgtMi43LTUuOC01LjgsMi42LTUuOSw1LjgtNS45LDUuOSwyLjUsNS45LDUuOFpNMjYzLjksNjIuNGMwLDIuNywyLjIsNC43LDQuNyw0LjdzNC43LTIsNC43LTQuOC0yLjMtNC43LTQuNy00LjctNC43LDEuOS00LjcsNC44WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0yNzYuMSw2Ny45bDEuNi0xMS4xaC4ybDQuNSw5LjEsNC41LTkuMWguMmwxLjYsMTEuMWgtMS4xbC0xLjEtNy45LTMuOSw3LjloLS4zbC00LTgtMS4xLDhoLTEuMVoiLz4KICAgICAgPHBhdGggY2xhc3M9ImNscy00IiBkPSJNMjkwLjgsNTYuOGg2LjN2MS4xaC01LjJ2My41aDUuMnYxLjFoLTUuMnY0LjRoNS4ydjEuMWgtNi4zdi0xMS4xWiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0zMDMuMyw1Ni44aDEuMXYxMGg0LjN2MS4xaC01LjR2LTExLjFaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTMyMC43LDYyLjRjMCwzLjMtMi41LDUuOC01LjgsNS44cy01LjgtMi43LTUuOC01LjgsMi42LTUuOSw1LjgtNS45LDUuOSwyLjUsNS45LDUuOFpNMzEwLjIsNjIuNGMwLDIuNywyLjIsNC43LDQuNyw0LjdzNC43LTIsNC43LTQuOC0yLjMtNC43LTQuNy00LjctNC43LDEuOS00LjcsNC44WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0zMjYuNSw1Ni44bDUuMiwxMS4xaC0xLjJsLTEuNy0zLjZoLTQuOGwtMS43LDMuNmgtMS4ybDUuMi0xMS4xaC4zWk0zMjYuNCw1OS4ybC0xLjksNGgzLjhsLTEuOS00WiIvPgogICAgICA8cGF0aCBjbGFzcz0iY2xzLTQiIGQ9Ik0zMzMuNCw2Ny45di0xMS4xaC4ybDcuMyw4LjV2LTguNWgxLjF2MTEuMWgtLjJsLTcuMy04LjR2OC40aC0xLjFaIi8+CiAgICAgIDxwYXRoIGNsYXNzPSJjbHMtNCIgZD0iTTM0OS41LDU5LjFjLS42LS44LTEuMS0xLjQtMi0xLjRzLTEuNS43LTEuNSwxLjQuNCwxLjIsMSwxLjdjMi4xLDEuNSwzLjYsMi42LDMuNiw0LjRzLTEuMywzLTMuMSwzLTIuNS0uOC0zLjMtMi4zbC45LS42Yy43LDEuMiwxLjUsMS44LDIuMywxLjhzMi4xLS44LDIuMS0xLjktMS4xLTEuOS0zLjctNGMtLjUtLjQtLjktMS4zLS45LTIuMSwwLTEuNSwxLjItMi42LDIuNy0yLjZzMi4yLjgsMi45LDEuOGwtLjkuN1oiLz4KICAgIDwvZz4KICA8L2c+CiAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIxNTgiIHk9IjM4IiB3aWR0aD0iLjkiIGhlaWdodD0iMzQuMyIvPgo8L3N2Zz4=" alt="Miguel Pi&ntilde;a | CMG Home Loans">
+        <div>
+          <div><b>Miguel Pi&ntilde;a</b> &middot; Loan Officer &middot; NMLS# 1570598 &middot; Branch NMLS# 1151668</div>
+          <div class="foot-btns">
+            <a class="foot-btn lime" href="tel:+15129541394">&#9742;&nbsp; Call (512) 954-1394</a>
+          </div>
+        </div>
+      </div>
+      <div class="disc">CMG Mortgage, Inc. dba CMG Home Loans, NMLS# 1820. Equal Housing Opportunity. Registered Mortgage Banker with the Texas Department of Savings and Mortgage Lending. Some products may have higher rates, points, or fees. This is not a commitment to lend. Terms subject to change.</div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://www.cmgfi.com/CMGCalc.css">
+  <script src="https://www.cmgfi.com/CMGCalc.bundle.js"></script>
+  <script>
+    var settings = {tabs:{Highcharts:{column:{Interest:'#138890',Principal:'#3DABB2'},pie:{Principal:'#138890',Interest:'#9CC846',Taxes:'#2A343D',Insurance:'#9B9B9B',MortgageInsurance:'#32A4AC'}},buttonColor:'#9AC125',highlightedTextColor:'#138890',highlightedTextColorLight:'#32A4AC',headerColor:'#138890',lo:'true',loName:'Miguel Pina',loTitle:'Loan Officer | He/Him',loNmls:'1570598',loImageurl:'https://cloud.cmgfi.com/dvbdysuf5/a_exif,f_auto,g_faces,c_thumb,w_68,h_68,z_0.5,r_max,bo_3px_solid_white/CMG_Web_Resources/LO_Images/Production_2227_Miguel_Pina',loLocation:'Austin, TX',loPhone:'(512) 954-1394',loEmail:'mpina@cmghomeloans.com',loMysite:'https://www.cmghomeloans.com/mysite/miguel-pina-jr',loApplynow:'https://secure.cmghomeloans.com/apply?id=221224',loLogo:'https://cloud.cmgfi.com/dvbdysuf5/image/upload/v1652370622/JV_Web_Resources/CMGHL/Navigation_Images/Logo.svg'}};
+    var params = {navigateMode:true,calcMode:'Mortgage',footnote:true,amortTab:true,displayLO:true};
+    window.addEventListener('load', function () {
+      try {
+        var calc = new CMGCalc($('#calculator'), params, settings);
+        calc.init();
+      } catch (e) { console.error('Calculator failed to load:', e); }
+    });
+  </script>
+
+  <script>
+    (function () {
+      var input = document.getElementById("fp-close");
+      var dateEl = document.getElementById("fp-date");
+      var noteEl = document.getElementById("fp-note");
+      if (!input) return;
+      var MONTHS = ["January","February","March","April","May","June",
+                    "July","August","September","October","November","December"];
+      function ordinal(n){ var s=["th","st","nd","rd"],v=n%100; return n+(s[(v-20)%10]||s[v]||s[0]); }
+      function compute() {
+        var v = input.value;
+        if (!v) { dateEl.textContent = "\u2014"; noteEl.textContent = "Pick a closing date above."; return; }
+        var parts = v.split("-");
+        var y = +parts[0], m = +parts[1]-1, d = +parts[2];
+        // first payment = 1st of the second month after closing
+        var fp = new Date(y, m + 2, 1);
+        dateEl.textContent = MONTHS[fp.getMonth()] + " " + ordinal(fp.getDate()) + ", " + fp.getFullYear();
+        var closeFmt = MONTHS[m] + " " + ordinal(d);
+        noteEl.textContent = "Closing " + closeFmt + " \u2192 interest from closing through month-end is collected at closing; the regular payment cycle starts " + MONTHS[fp.getMonth()] + " 1.";
+      }
+      input.addEventListener("change", compute);
+      input.addEventListener("input", compute);
+
+      // ---- CD timing: latest date CD must be received (3 business days before close) ----
+      // Business days = all calendar days EXCEPT Sundays and federal holidays (Saturdays count).
+      var cdIn = document.getElementById("cd-close");
+      if (cdIn) {
+        var cdDate = document.getElementById("cd-date");
+        var cdNote = document.getElementById("cd-note");
+        // Federal holidays helper (observed) for +/- 2 years around now
+        function fixedHolidays(year) {
+          // month is 0-indexed; returns list of Date
+          function obs(m, d) {
+            var dt = new Date(year, m, d), day = dt.getDay();
+            if (day === 0) return new Date(year, m, d + 1);   // Sun -> Mon
+            if (day === 6) return new Date(year, m, d - 1);   // Sat -> Fri
+            return dt;
+          }
+          function nthWeekday(m, weekday, n) {
+            var dt = new Date(year, m, 1), cnt = 0;
+            while (true) { if (dt.getDay() === weekday) { cnt++; if (cnt === n) return new Date(year, m, dt.getDate()); } dt.setDate(dt.getDate()+1); }
+          }
+          function lastWeekday(m, weekday) {
+            var dt = new Date(year, m + 1, 0);
+            while (dt.getDay() !== weekday) dt.setDate(dt.getDate()-1);
+            return new Date(year, m, dt.getDate());
+          }
+          return [
+            obs(0,1),                 // New Year's Day
+            nthWeekday(0,1,3),        // MLK Day (3rd Mon Jan)
+            nthWeekday(1,1,3),        // Presidents' Day (3rd Mon Feb)
+            lastWeekday(4,1),         // Memorial Day (last Mon May)
+            obs(5,19),                // Juneteenth
+            obs(6,4),                 // Independence Day
+            nthWeekday(8,1,1),        // Labor Day (1st Mon Sep)
+            nthWeekday(9,1,2),        // Columbus Day (2nd Mon Oct)
+            obs(10,11),               // Veterans Day
+            nthWeekday(10,4,4),       // Thanksgiving (4th Thu Nov)
+            obs(11,25)                // Christmas
+          ];
+        }
+        function isHoliday(dt) {
+          var hs = fixedHolidays(dt.getFullYear());
+          for (var i=0;i<hs.length;i++){ if (hs[i].getMonth()===dt.getMonth() && hs[i].getDate()===dt.getDate()) return true; }
+          return false;
+        }
+        function isBusinessDay(dt) { return dt.getDay() !== 0 && !isHoliday(dt); } // exclude Sundays + holidays
+        function cdCompute() {
+          var v = cdIn.value;
+          if (!v) { cdDate.textContent = "\u2014"; cdNote.textContent = "Pick a closing date above."; return; }
+          var p = v.split("-");
+          var dt = new Date(+p[0], +p[1]-1, +p[2]);
+          // count back 3 business days BEFORE closing (closing day itself not counted)
+          var counted = 0;
+          while (counted < 3) { dt.setDate(dt.getDate() - 1); if (isBusinessDay(dt)) counted++; }
+          cdDate.textContent = MONTHS[dt.getMonth()] + " " + ordinal(dt.getDate()) + ", " + dt.getFullYear();
+          cdNote.textContent = "Buyer must have the CD in hand by this date. Business days count Saturdays but exclude Sundays and federal holidays. If mailed, it's presumed received 3 business days after sending \u2014 build in extra time.";
+        }
+        cdIn.addEventListener("change", cdCompute);
+        cdIn.addEventListener("input", cdCompute);
+      }
+
+      // ---- Max seller credit ----
+      var scLoan = document.getElementById("sc-loan");
+      if (scLoan) {
+        var scOcc = document.getElementById("sc-occ");
+        var scDp = document.getElementById("sc-dp");
+        var scPct = document.getElementById("sc-pct");
+        var scNote = document.getElementById("sc-note");
+        var convOcc = document.getElementById("sc-conv-occ");
+        var convDp = document.getElementById("sc-conv-dp");
+        function scCompute() {
+          var loan = scLoan.value;
+          var showConv = (loan === "conv");
+          convOcc.style.display = showConv ? "flex" : "none";
+          convDp.style.display = (showConv && scOcc.value === "primary") ? "flex" : "none";
+          if (loan === "fha") { scPct.textContent = "6%"; scNote.textContent = "FHA caps interested-party contributions at 6% of the sales price, for all occupancy types."; return; }
+          if (loan === "va")  { scPct.textContent = "4%"; scNote.textContent = "VA caps seller concessions at 4% of the value. Note: standard closing costs the seller pays don't count toward the 4% \u2014 only concessions like prepaids, points buydowns, and paying the buyer's debts do."; return; }
+          if (loan === "usda"){ scPct.textContent = "6%"; scNote.textContent = "USDA allows seller contributions up to 6% of the sales price."; return; }
+          // conventional
+          if (scOcc.value === "investment") { scPct.textContent = "2%"; scNote.textContent = "Conventional investment properties are capped at 2% regardless of down payment."; return; }
+          var dp = scDp.value;
+          if (dp === "low")  { scPct.textContent = "3%"; scNote.textContent = "Primary/second home with less than 10% down: capped at 3% of the sales price."; }
+          else if (dp === "mid") { scPct.textContent = "6%"; scNote.textContent = "Primary/second home with 10%\u201324.99% down: capped at 6% of the sales price."; }
+          else { scPct.textContent = "9%"; scNote.textContent = "Primary/second home with 25% or more down: capped at 9% of the sales price."; }
+        }
+        scLoan.addEventListener("change", scCompute);
+        scOcc.addEventListener("change", scCompute);
+        scDp.addEventListener("change", scCompute);
+        scCompute();
+      }
+    })();
+  </script>
+
+  <script>
+  (function () {
+    var CAT_META = {
+      "Quick Reference":      ["Fast answers for the table", "Limits, DTI, credit, and seasoning at a glance."],
+      "Buyer Programs":       ["Get more buyers to the table", "Low-down, future-income, and second-chance paths."],
+      "Investor & Specialty": ["For portfolios and tough listings", "DSCR, renovation, and creative rate tools."],
+      "Market & Education":   ["Share-pieces that build trust", "Data and updates to reassure and inform."]
+    };
+
+    function esc(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+    function catId(c){ return c.toLowerCase().replace(/ & /g,"-").replace(/ /g,"-"); }
+
+    function pdfCard(f) {
+      return '<a class="flyer" href="flyers/' + esc(f.slug) + '.pdf" target="_blank" rel="noopener">'
+           + '<div class="flyer-top"><span class="tag">' + esc(f.category) + '</span>'
+           + '<span class="open">Open PDF &rarr;</span></div>'
+           + '<h3>' + esc(f.title) + '</h3>'
+           + '<p>' + esc(f.blurb) + '</p>'
+           + '<div class="usewhen"><span>Use when</span> ' + esc(f.use_when) + '</div>'
+           + '</a>';
+    }
+
+    function infoCard(f) {
+      var hl = (f.highlights || []).map(function (h) {
+        return '<li>' + esc(h) + '</li>';
+      }).join("");
+      var displayDate = f.date || f.posted || "";
+      var tag = displayDate ? esc(displayDate) : "Update";
+      var note = f.footer_note ? '<div class="info-note">' + esc(f.footer_note) + '</div>' : '';
+      var uw = f.use_when ? '<div class="usewhen"><span>Use when</span> ' + esc(f.use_when) + '</div>' : '';
+      return '<div class="flyer info-card" role="button" tabindex="0" onclick="window.__toggleInfo(this)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();window.__toggleInfo(this);}">'
+           + '<div class="flyer-top"><span class="tag info-tag">' + tag + '</span>'
+           + '<span class="open info-open">Read &darr;</span></div>'
+           + '<h3>' + esc(f.title) + '</h3>'
+           + '<p>' + esc(f.blurb) + '</p>'
+           + '<div class="info-body">'
+           + '<div class="info-hl-label">Highlights</div>'
+           + '<ul class="info-hl">' + hl + '</ul>'
+           + note
+           + '</div>'
+           + uw
+           + '</div>';
+    }
+
+    function parseDate(s) {
+      // accepts "2026-06-23", "June 2026", "Updated 2026", or anything Date can parse.
+      if (!s) return 0;
+      var cleaned = String(s).replace(/^updated\s+/i, "").trim();
+      var t = Date.parse(cleaned);
+      if (!isNaN(t)) return t;
+      // try "Month YYYY"
+      var t2 = Date.parse("1 " + cleaned);
+      return isNaN(t2) ? 0 : t2;
+    }
+
+    function render(data) {
+      var cats = data.categories || [];
+      var flyers = data.flyers || [];
+
+      // --- Updates & Insights: all info posts, newest first ---
+      var updatesGrid = document.getElementById("updates-grid");
+      if (updatesGrid) {
+        var posts = flyers.filter(function (f) { return f.type === "info"; });
+        posts.sort(function (a, b) {
+          return parseDate(b.posted || b.date) - parseDate(a.posted || a.date);
+        });
+        if (posts.length) {
+          updatesGrid.innerHTML = posts.map(infoCard).join("");
+        } else {
+          updatesGrid.innerHTML = '<p class="updates-empty">No updates posted yet \u2014 check back soon.</p>';
+        }
+      }
+
+      // --- Flyer library: PDF flyers only, grouped by category ---
+      var container = document.getElementById("flyer-sections");
+      if (!container) return;
+      var html = "";
+      cats.forEach(function (cat) {
+        var items = flyers.filter(function (f) { return f.category === cat && f.type !== "info"; });
+        if (!items.length) return;
+        var meta = CAT_META[cat] || ["", ""];
+        html += '<section class="cat-section" id="' + catId(cat) + '">';
+        html += '<div class="cat-head"><h2>' + esc(cat) + '</h2>';
+        html += '<p>' + esc(meta[0]) + (meta[1] ? ' &mdash; ' + esc(meta[1]) : '') + '</p></div>';
+        html += '<div class="flyer-grid">';
+        items.forEach(function (f) { html += pdfCard(f); });
+        html += '</div></section>';
+      });
+      container.innerHTML = html;
+    }
+
+    window.__toggleInfo = function (el) {
+      el.classList.toggle("open-info");
+      var o = el.querySelector(".info-open");
+      if (o) o.innerHTML = el.classList.contains("open-info") ? "Close &uarr;" : "Read &darr;";
+    };
+
+    fetch("flyers.json?v=" + Date.now())
+      .then(function (r) { if (!r.ok) throw new Error("flyers.json not found"); return r.json(); })
+      .then(render)
+      .catch(function (e) {
+        var c = document.getElementById("flyer-sections");
+        if (c) c.innerHTML = '<p style="padding:40px 0;color:#66707a;">Flyers are loading\u2026 if this persists, check that flyers.json is published.</p>';
+        console.error(e);
+      });
+  })();
+  </script>
+
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+  <script type="text/javascript">
+    window.addEventListener("load", function () {
+      if (window.Calendly && Calendly.initBadgeWidget) {
+        Calendly.initBadgeWidget({
+          url: 'https://calendly.com/miguelpinatx',
+          text: 'Schedule time with me',
+          color: '#2C343C',
+          textColor: '#ffffff',
+          branding: true
+        });
+      }
+    });
+  </script>
+</body>
+</html>
