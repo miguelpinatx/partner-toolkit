@@ -158,6 +158,26 @@
         "A warrantability check upfront is still smart — send me the project and I will confirm before your buyer writes."
       ],
       "footer_note": "General overview, not a commitment to lend. Each project is reviewed individually."
+    },
+    {
+      "type": "info",
+      "slug": "departing-residence-rental-income",
+      "title": "Keeping the Old House? How Rental Income Helps Your Buyer Qualify",
+      "category": "Market & Education",
+      "blurb": "When a buyer keeps their current home and rents it out to buy the next one, the rent can help them qualify — but how much counts depends on the loan type and their landlord experience. Here's the plain-English version.",
+      "use_when": "A buyer wants to keep their current home as a rental and buy a new primary residence.",
+      "date": "June 2026",
+      "posted": "2026-06-23",
+      "highlights": [
+        "The setup: your buyer keeps their current home, rents it out, and buys a new primary residence. The rent on the departing home can offset that home's payment — and sometimes add to qualifying income — which can make or break the new loan's debt-to-income.",
+        "Conventional (Fannie & Freddie): a current signed lease is required, plus proof it is real (recent rent deposits, or the security deposit and first month rent). Generally 75% of the lease rent is used to offset the departing home full payment (principal, interest, taxes, insurance, HOA).",
+        "The experience rule on Conventional: if your buyer has at least 1 year of landlord/property-management experience, rent above the departing home's payment can be added to their income. Without that experience, the rent can only cancel out the payment — no extra income credit.",
+        "FHA: a fully executed 1-year lease plus proof of the security deposit or first month rent. To use the rent, the buyer generally needs to be relocating 100+ miles, hold at least 25% equity (shown by a full appraisal), and full rent can offset the payment only — no reserves required.",
+        "VA: full rental income can be used to offset the departing home's payment, and VA does not require proof of property-management experience.",
+        "USDA: not an option here — USDA requires a 2-year history of receiving rental income, so a freshly converted departing residence will not qualify.",
+        "Short-term rentals (Airbnb-style): a brand-new short-term lease without a 12-month Schedule E history generally cannot be used on the Conventional side."
+      ],
+      "footer_note": "General guideline overview, not a commitment to lend — agency rules change and every file is different. Send me the scenario and I'll confirm exactly how the numbers work for your client."
     }
   ]
 }
